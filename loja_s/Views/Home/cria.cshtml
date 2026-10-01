@@ -1,0 +1,161 @@
+@{
+    Layout = null;
+    ViewData["Title"] = "Criar Conta - Loja de Suplementos";
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #dcdcdc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .auth-container {
+            display: flex;
+            background-color: #e0e0e0;
+            width: 450px;
+            height: 360px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .auth-sidebar {
+            background-color: #5b76f2;
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-circle {
+            width: 85px;
+            height: 85px;
+            background-color: #dcdcdc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .auth-form-area {
+            width: 60%;
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #e0e0e0;
+        }
+
+        .auth-form-area h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            font-size: 11px;
+            color: #555;
+            margin-bottom: 10px;
+            text-transform: lowercase;
+        }
+
+        .input-group input {
+            padding: 7px;
+            border: none;
+            background-color: white;
+            margin-top: 3px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        .btn-red {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 9px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 3px;
+            width: 100%;
+            text-transform: uppercase;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .btn-red:hover {
+            background-color: #d40000;
+        }
+
+        .switch-auth {
+            font-size: 11px;
+            color: #555;
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .switch-auth a {
+            color: #5b76f2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .switch-auth a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <!-- Bloco Azul Lateral com a Logo -->
+        <div class="auth-sidebar">
+            <div class="logo-circle">logo</div>
+        </div>
+
+        <!-- Bloco de Formulário de Cadastro -->
+        <div class="auth-form-area">
+            <h2>Criar Conta</h2>
+            <form>
+                <div class="input-group">
+                    <label>nome</label>
+                    <input type="text" placeholder="Digite seu nome completo" required>
+                </div>
+                <div class="input-group">
+                    <label>e-mail</label>
+                    <input type="email" placeholder="Digite seu e-mail" required>
+                </div>
+                <div class="input-group">
+                    <label>senha</label>
+                    <input type="password" placeholder="Crie uma senha" required>
+                </div>
+                <button type="submit" class="btn-red">criar conta</button>
+            </form>
+            <p class="switch-auth">Já tem uma conta? <a asp-controller="Home" asp-action="Login">Faça login</a></p>
+        </div>
+    </div>
+
+</body>
+</html>

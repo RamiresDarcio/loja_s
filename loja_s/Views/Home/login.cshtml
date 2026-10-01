@@ -1,0 +1,41 @@
+@{
+    Layout = null;
+    ViewData["Title"] = "Login - Loja de Suplementos";
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/aparecial.css" asp-append-version="true">
+</head>
+<body>
+
+    <div class="auth-container">
+        <!-- Bloco Azul Lateral com a Logo -->
+        <div class="auth-sidebar">
+            <div class="logo-circle">logo</div>
+        </div>
+
+        <!-- Bloco de Formulário de Login -->
+        <div class="auth-form-area">
+            <h2>Entrar</h2>
+            <form>
+                <div class="input-group">
+                    <label>e-mail</label>
+                    <input type="email" placeholder="Digite seu e-mail" required>
+                </div>
+                <div class="input-group">
+                    <label>senha</label>
+                    <input type="password" placeholder="Digite sua senha" required>
+                </div>
+                <button type="submit" class="btn-red">entrar</button>
+            </form>
+            <p class="switch-auth">Não tem uma conta? <a asp-controller="Home" asp-action="Cria">Criar conta</a></p>
+        </div>
+    </div>
+
+</body>
+</html>

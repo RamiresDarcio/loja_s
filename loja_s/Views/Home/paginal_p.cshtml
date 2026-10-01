@@ -1,0 +1,68 @@
+@{
+    Layout = null;
+    ViewData["Title"] = "Detalhes do Produto";
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/paginal_p.css" asp-append-version="true">
+</head>
+<body>
+
+    <header class="top-bar"></header>
+
+    <main class="product-detail-container">
+        <!-- Seção Superior: Imagem e Dados Principais -->
+        <div class="product-top-section">
+            <div class="gallery">
+                <div class="main-image"></div>
+                <div class="sub-images">
+                    <div class="sub-img"></div>
+                    <div class="sub-img"></div>
+                    <div class="sub-img"></div>
+                </div>
+            </div>
+            
+            <div class="purchase-info">
+                <h1>produtos</h1>
+                <p class="price-tag">R$ 0,00</p>
+                
+                <div class="quantity-selector">
+                    <button>-</button>
+                    <span>1</span>
+                    <button>+</button>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-cart">Adicionar ao Carrinho</button>
+                    <button class="btn-buy-now">Comprar Agora</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Resumo/Descrição -->
+        <section class="summary-section">
+            <h2>resumo</h2>
+            <p>Os suplementos são produtos utilizados para complementar a alimentação e podem fornecer nutrientes como vitaminas, minerais, proteínas e outros compostos...</p>
+        </section>
+
+        <!-- Seção de Avaliações -->
+        <section class="reviews-section">
+            <div class="review-item">
+                <div class="user-avatar"></div>
+                <div class="review-content">
+                    <span class="stars">★★★★★</span>
+                    <span class="date">a month ago</span>
+                    <p>Third Marble Marketing is my go to resource in Richmond...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

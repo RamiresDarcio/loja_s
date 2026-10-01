@@ -1,0 +1,96 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Loja de Suplementos - Home";
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/paginal_i.css" asp-append-version="true">
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header class="header">
+        <div class="logo">logo</div>
+        <div class="search-bar">
+            <input type="text">
+            <button class="search-btn"></button>
+        </div>
+        <div class="user-actions">
+            <a asp-controller="Home" asp-action="Login" class="icon-user">👤</a>
+            <a href="#" class="icon-cart">🛒</a>
+        </div>
+    </header>
+
+    <!-- Carrossel de Destaque -->
+    <section class="carousel">
+        <button class="arrow left">&lt;</button>
+        <div class="banner-placeholder"></div>
+        <button class="arrow right">&gt;</button>
+    </section>
+
+    <!-- Miniaturas de navegação do carrossel -->
+    <div class="carousel-thumbs">
+        <div class="thumb"></div>
+        <div class="thumb"></div>
+        <div class="thumb"></div>
+        <div class="thumb"></div>
+    </div>
+
+    <!-- Grade de Produtos -->
+    <main class="product-grid">
+        <!-- Repetir o card de produto conforme necessário -->
+        <div class="product-card">
+            <div class="product-img"></div>
+            <div class="product-info">
+                <span class="price">R$ 0,00</span>
+                <span class="producer">nome produtor</span>
+                <button class="buy-btn">COMPRAR</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img"></div>
+            <div class="product-info">
+                <span class="price">R$ 0,00</span>
+                <span class="producer">nome produtor</span>
+                <button class="buy-btn">COMPRAR</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img"></div>
+            <div class="product-info">
+                <span class="price">R$ 0,00</span>
+                <span class="producer">nome produtor</span>
+                <button class="buy-btn">COMPRAR</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-img"></div>
+            <div class="product-info">
+                <span class="price">R$ 0,00</span>
+                <span class="producer">nome produtor</span>
+                <button class="buy-btn">COMPRAR</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="payment-methods">💳 Métodos de Pagamento</div>
+        <div class="footer-info">
+            <h3>Informações</h3>
+        </div>
+        <div class="footer-contact">
+            <h3>central de atendimentos</h3>
+            <p>61 99999-9999</p>
+            <p>e-mail</p>
+        </div>
+    </footer>
+
+</body>
+</html>

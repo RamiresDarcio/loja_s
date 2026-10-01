@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #dcdcdc; /* Fundo cinza padrão do protótipo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Caixa principal que engloba o painel */
+.auth-container {
+    display: flex;
+    background-color: #e0e0e0;
+    width: 450px;
+    height: 360px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/* Painel esquerdo em azul */
+.auth-sidebar {
+    background-color: #5b76f2; /* Azul royal dos protótipos */
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Círculo da logo */
+.logo-circle {
+    width: 85px;
+    height: 85px;
+    background-color: #dcdcdc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Área de inputs e textos à direita */
+.auth-form-area {
+    width: 60%;
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #e0e0e0;
+}
+
+.auth-form-area h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/* Campos de formulário */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 10px;
+    text-transform: lowercase;
+}
+
+.input-group input {
+    padding: 7px;
+    border: none;
+    background-color: white;
+    margin-top: 3px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+/* Botão Vermelho de Ação */
+.btn-red {
+    background-color: #ff0000; /* Vermelho padrão dos botões */
+    color: white;
+    border: none;
+    padding: 9px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 3px;
+    width: 100%;
+    text-transform: uppercase;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+.btn-red:hover {
+    background-color: #d40000;
+}
+
+/* Link para alternar entre login e cadastro */
+.switch-auth {
+    font-size: 11px;
+    color: #555;
+    text-align: center;
+    margin-top: 12px;
+}
+
+.switch-auth a {
+    color: #5b76f2;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.switch-auth a:hover {
+    text-decoration: underline;
+}
