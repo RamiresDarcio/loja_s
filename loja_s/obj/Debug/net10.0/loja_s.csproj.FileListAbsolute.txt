@@ -106,3 +106,4 @@ C:\Users\ramir\AppData\Local\Temp\loja_s-build-check\loja_s.runtimeconfig.json
 C:\Users\ramir\AppData\Local\Temp\loja_s-build-check\loja_s.dll
 C:\Users\ramir\AppData\Local\Temp\loja_s-build-check\loja_s.pdb
 c:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\yn1jpvmti3-{0}-ikq7vlac49-ikq7vlac49.gz
+C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\loja_s.sourcelink.json
