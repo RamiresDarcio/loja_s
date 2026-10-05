@@ -28,92 +28,140 @@
     </header>
 
     <!-- Carrossel de Destaque -->
-    <section class="carousel">
-        <button class="arrow left">&lt;</button>
-        <div class="banner-placeholder"></div>
-        <button class="arrow right">&gt;</button>
+    <section class="carousel" data-carousel aria-label="Produtos em destaque">
+        <div class="carousel-track">
+            <article class="carousel-slide is-active"
+                     aria-roledescription="slide"
+                     aria-label="1 de 3"
+                     aria-hidden="false">
+                <a class="carousel-banner-link"
+                   asp-controller="Home"
+                   asp-action="Produto_1"
+                   aria-label="Ver produto Bowsette Edition">
+                    <img class="carousel-banner-image"
+                         src="~/img/banner/bowsette%20edition.png"
+                         alt="Creatina Power Dragon Bowsette Edition, suplemento para força, energia e desempenho." />
+                </a>
+            </article>
+
+            <article class="carousel-slide"
+                     aria-roledescription="slide"
+                     aria-label="2 de 3"
+                     aria-hidden="true"
+                     inert>
+                <a class="carousel-banner-link"
+                   asp-controller="Home"
+                   asp-action="Produto_2"
+                   aria-label="Ver produto Juri Edition">
+                    <img class="carousel-banner-image"
+                         src="~/img/banner/juri%20edition.png"
+                         alt="Multivitamínico Chaos Energy Juri Edition, com vitaminas e minerais para complementar a alimentação." />
+                </a>
+            </article>
+
+            <article class="carousel-slide"
+                     aria-roledescription="slide"
+                     aria-label="3 de 3"
+                     aria-hidden="true"
+                     inert>
+                <a class="carousel-banner-link"
+                   asp-controller="Home"
+                   asp-action="Produto_3"
+                   aria-label="Ver produto Nami Edition">
+                    <img class="carousel-banner-image"
+                         src="~/img/banner/nani%20edition.png"
+                         alt="Suplemento Blue Sea Omega 3 Nami Edition, com EPA e DHA para complementar a rotina de bem-estar." />
+                </a>
+            </article>
+        </div>
+
+        <button class="carousel-control carousel-previous" type="button" aria-label="Banner anterior">
+            <span aria-hidden="true">‹</span>
+        </button>
+        <button class="carousel-control carousel-next" type="button" aria-label="Próximo banner">
+            <span aria-hidden="true">›</span>
+        </button>
+
+        <div class="carousel-footer">
+            <div class="carousel-thumbs" aria-label="Escolher banner">
+                <button class="thumb is-active" type="button" aria-label="Mostrar banner Bowsette Edition" aria-current="true" data-slide-to="0"></button>
+                <button class="thumb" type="button" aria-label="Mostrar banner Juri Edition" aria-current="false" data-slide-to="1"></button>
+                <button class="thumb" type="button" aria-label="Mostrar banner Nami Edition" aria-current="false" data-slide-to="2"></button>
+            </div>
+            <button class="carousel-toggle" type="button" aria-label="Pausar troca automática" aria-pressed="false">Ⅱ</button>
+        </div>
     </section>
 
-    <!-- Miniaturas de navegação do carrossel -->
-    <div class="carousel-thumbs">
-        <div class="thumb"></div>
-        <div class="thumb"></div>
-        <div class="thumb"></div>
-        <div class="thumb"></div>
-    </div>
+    <main class="product-grid">
+        <div class="products-heading">
+            <h1>Nossos produtos</h1>
+            <p>Encontre o suplemento ideal para sua rotina.</p>
+        </div>
 
-    <!-- Grade de Produtos -->
-    <main class="product-grid">
-        <!-- Repetir o card de produto conforme necessário -->
-        <div class="product-card">
-            <div class="product-img"></div>
+        <article class="product-card">
+            <div class="product-img" aria-hidden="true"><span>Imagem do produto</span></div>
             <div class="product-info">
+                <span class="producer"><a asp-controller="Home" asp-action="Produto_1">Produto 1</a></span>
                 <span class="price">R$ 0,00</span>
-                <span class="producer">nome produtor</span>
-                <button class="buy-btn">COMPRAR</button>
+                <a class="buy-btn" asp-controller="Home" asp-action="Produto_1">COMPRAR</a>
             </div>
-        </div>
-        <div class="product-card">
-            <div class="product-img"></div>
+        </article>
+        <article class="product-card">
+            <div class="product-img" aria-hidden="true"><span>Imagem do produto</span></div>
             <div class="product-info">
+                <span class="producer"><a asp-controller="Home" asp-action="Produto_2">Produto 2</a></span>
                 <span class="price">R$ 0,00</span>
-                <span class="producer">nome produtor</span>
-                <button class="buy-btn">COMPRAR</button>
+                <a class="buy-btn" asp-controller="Home" asp-action="Produto_2">COMPRAR</a>
             </div>
-        </div>
-        <div class="product-card">
-            <div class="product-img"></div>
+        </article>
+        <article class="product-card">
+            <div class="product-img" aria-hidden="true"><span>Imagem do produto</span></div>
             <div class="product-info">
+                <span class="producer"><a asp-controller="Home" asp-action="Produto_3">Produto 3</a></span>
                 <span class="price">R$ 0,00</span>
-                <span class="producer">nome produtor</span>
-                <button class="buy-btn">COMPRAR</button>
+                <a class="buy-btn" asp-controller="Home" asp-action="Produto_3">COMPRAR</a>
             </div>
-        </div>
-        <div class="product-card">
-            <div class="product-img"></div>
+        </article>
+        <article class="product-card">
+            <div class="product-img" aria-hidden="true"><span>Imagem do produto</span></div>
             <div class="product-info">
+                <span class="producer"><a asp-controller="Home" asp-action="Produto_4">Produto 4</a></span>
                 <span class="price">R$ 0,00</span>
-                <span class="producer">nome produtor</span>
-                <button class="buy-btn">COMPRAR</button>
+                <a class="buy-btn" asp-controller="Home" asp-action="Produto_4">COMPRAR</a>
             </div>
-        </div>
-    </main>
-    <div><img src="" alt=""></div>
-        <!-- Grade de Produtos -->
-    <main class="product-grid">
-        <!-- Repetir o card de produto conforme necessário -->
-        <div class="product-card">
-            <div class="product-img"></div>
+        </article>
+        <article class="product-card">
+            <div class="product-img" aria-hidden="true"><span>Imagem do produto</span></div>
             <div class="product-info">
+                <span class="producer"><a asp-controller="Home" asp-action="Produto_5">Produto 5</a></span>
                 <span class="price">R$ 0,00</span>
-                <span class="producer">nome produtor</span>
-                <button class="buy-btn">COMPRAR</button>
+                <a class="buy-btn" asp-controller="Home" asp-action="Produto_5">COMPRAR</a>
             </div>
-        </div>
-        <div class="product-card">
-            <div class="product-img"></div>
+        </article>
+        <article class="product-card">
+            <div class="product-img" aria-hidden="true"><span>Imagem do produto</span></div>
             <div class="product-info">
+                <span class="producer"><a asp-controller="Home" asp-action="Produto_6">Produto 6</a></span>
                 <span class="price">R$ 0,00</span>
-                <span class="producer">nome produtor</span>
-                <button class="buy-btn">COMPRAR</button>
+                <a class="buy-btn" asp-controller="Home" asp-action="Produto_6">COMPRAR</a>
             </div>
-        </div>
-        <div class="product-card">
-            <div class="product-img"></div>
+        </article>
+        <article class="product-card">
+            <div class="product-img" aria-hidden="true"><span>Imagem do produto</span></div>
             <div class="product-info">
+                <span class="producer"><a asp-controller="Home" asp-action="Produto_7">Produto 7</a></span>
                 <span class="price">R$ 0,00</span>
-                <span class="producer">nome produtor</span>
-                <button class="buy-btn">COMPRAR</button>
+                <a class="buy-btn" asp-controller="Home" asp-action="Produto_7">COMPRAR</a>
             </div>
-        </div>
-        <div class="product-card">
-            <div class="product-img"></div>
+        </article>
+        <article class="product-card">
+            <div class="product-img" aria-hidden="true"><span>Imagem do produto</span></div>
             <div class="product-info">
+                <span class="producer"><a asp-controller="Home" asp-action="Produto_8">Produto 8</a></span>
                 <span class="price">R$ 0,00</span>
-                <span class="producer">nome produtor</span>
-                <button class="buy-btn">COMPRAR</button>
+                <a class="buy-btn" asp-controller="Home" asp-action="Produto_8">COMPRAR</a>
             </div>
-        </div>
+        </article>
     </main>
     <!-- Rodapé -->
     <footer class="footer">
@@ -128,5 +176,6 @@
         </div>
     </footer>
 
+    <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>

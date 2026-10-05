@@ -1,0 +1,290 @@
+@model loja_s.Models.Produto
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Detalhes do Produto";
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/produto.css" asp-append-version="true">
+</head>
+<body>
+
+<header class="top-bar"></header>
+
+<div class="pagina-produto">
+    <a class="voltar-inicio" asp-controller="Home" asp-action="Index">← Voltar à página inicial</a>
+
+    <!-- =========================
+         PRODUTO
+    ========================== -->
+    <section class="produto-container">
+
+        <!-- GALERIA -->
+        <div class="galeria">
+
+            <div class="imagem-principal">
+                <img id="imagemPrincipal"
+                     src="~/imagens/produtos/whey.jpg"
+                     alt="@Model.Nome" />
+            </div>
+
+            <div class="miniaturas">
+
+                <button type="button"
+                        onclick="trocarImagem('/imagens/produtos/whey.jpg')">
+                    <img src="~/imagens/produtos/whey.jpg"
+                         alt="Imagem principal" />
+                </button>
+
+                <button type="button"
+                        onclick="trocarImagem('/imagens/produtos/whey-2.jpg')">
+                    <img src="~/imagens/produtos/whey-2.jpg"
+                         alt="Imagem lateral" />
+                </button>
+
+                <button type="button"
+                        onclick="trocarImagem('/imagens/produtos/whey-3.jpg')">
+                    <img src="~/imagens/produtos/whey-3.jpg"
+                         alt="Imagem do produto" />
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- INFORMAÇÕES -->
+        <div class="informacoes-produto">
+
+            <h1>@Model.Nome</h1>
+
+            <div class="preco">
+                R$ @Model.Preco.ToString("N2")
+            </div>
+
+            <!-- QUANTIDADE -->
+            <div class="quantidade-area">
+
+                <span class="quantidade-label">
+                    Quantidade
+                </span>
+
+                <div class="controle-quantidade">
+
+                    <button type="button"
+                            onclick="diminuirQuantidade()">
+                        −
+                    </button>
+
+                    <input id="quantidade"
+                           type="number"
+                           value="1"
+                           min="1"
+                           readonly />
+
+                    <button type="button"
+                            onclick="aumentarQuantidade()">
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOTÕES -->
+            <div class="acoes-produto">
+
+                <button class="btn-comprar"
+                        type="button">
+                    Comprar agora
+                </button>
+
+                <button class="btn-carrinho"
+                        type="button">
+                    Adicionar ao carrinho
+                </button>
+
+            </div>
+
+
+            <!-- DESCRIÇÃO -->
+            <div class="descricao">
+
+                <h2>Resumo</h2>
+
+                <p>
+                    @Model.Descricao
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         AVALIAÇÕES
+    ========================== -->
+
+    <section class="avaliacoes" id="avaliacoes" aria-labelledby="titulo-avaliacoes">
+
+        <div class="avaliacoes-titulo">
+
+            <div class="icone-usuario">
+                <span aria-hidden="true"></span>
+            </div>
+
+            <div class="linha-titulo">
+                <h2 id="titulo-avaliacoes">Avaliações dos clientes</h2>
+            </div>
+
+        </div>
+
+
+        <!-- AVALIAÇÃO -->
+        <article class="avaliacao">
+
+            <div class="avatar">
+                <span aria-hidden="true"></span>
+            </div>
+
+            <div class="avaliacao-conteudo">
+
+                <div class="estrelas">
+                    ★★★★★
+                </div>
+
+                <span class="data">
+                    a month ago
+                </span>
+
+                <h3>
+                    Excelente produto
+                </h3>
+
+                <p>
+                    Produto chegou rapidamente e em perfeito estado.
+                    Gostei bastante da qualidade e do atendimento.
+                </p>
+
+                <button class="btn-like" type="button">
+                    ♡ Like
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <!-- RESPOSTA -->
+        <article class="resposta">
+
+            <strong>Resposta da loja</strong>
+
+            <span class="data">
+                a month ago
+            </span>
+
+            <p>
+                Obrigado pela avaliação!
+                Ficamos felizes que tenha gostado do produto.
+            </p>
+
+            <button type="button" class="btn-editar">
+                ✎ Editar
+            </button>
+
+        </article>
+
+
+        <!-- OUTRA AVALIAÇÃO -->
+        <article class="avaliacao">
+
+            <div class="avatar">
+                <span aria-hidden="true"></span>
+            </div>
+
+            <div class="avaliacao-conteudo">
+
+                <div class="estrelas">
+                    ★★★★☆
+                </div>
+
+                <span class="data">
+                    2 weeks ago
+                </span>
+
+                <h3>
+                    Bom produto
+                </h3>
+
+                <p>
+                    Boa qualidade e entrega dentro do prazo.
+                </p>
+
+                <button class="btn-like" type="button">
+                    ♡ Like
+                </button>
+
+            </div>
+
+        </article>
+
+    </section>
+
+</div>
+
+<script>
+
+    function trocarImagem(imagem) {
+
+        const imagemPrincipal =
+            document.getElementById("imagemPrincipal");
+
+        imagemPrincipal.src = imagem;
+    }
+
+
+    function aumentarQuantidade() {
+
+        const campo =
+            document.getElementById("quantidade");
+
+        let quantidade =
+            parseInt(campo.value);
+
+        quantidade++;
+
+        campo.value = quantidade;
+    }
+
+
+    function diminuirQuantidade() {
+
+        const campo =
+            document.getElementById("quantidade");
+
+        let quantidade =
+            parseInt(campo.value);
+
+        if (quantidade > 1) {
+
+            quantidade--;
+
+            campo.value = quantidade;
+        }
+    }
+
+</script>
+
+</body>
+</html>

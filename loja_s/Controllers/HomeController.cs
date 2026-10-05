@@ -38,6 +38,34 @@ public class HomeController : Controller
         return View("produto", produto);
     }
 
+    public IActionResult Produto_1() => ExibirProduto(1);
+
+    public IActionResult Produto_2() => ExibirProduto(2);
+
+    public IActionResult Produto_3() => ExibirProduto(3);
+
+    public IActionResult Produto_4() => ExibirProduto(4);
+
+    public IActionResult Produto_5() => ExibirProduto(5);
+
+    public IActionResult Produto_6() => ExibirProduto(6);
+
+    public IActionResult Produto_7() => ExibirProduto(7);
+
+    public IActionResult Produto_8() => ExibirProduto(8);
+
+    private IActionResult ExibirProduto(int numero)
+    {
+        var produto = new Produto
+        {
+            Nome = $"Produto {numero}",
+            Preco = 0,
+            Descricao = "Suplemento utilizado para complementar a alimentação."
+        };
+
+        return View($"produto_{numero}", produto);
+    }
+
     public IActionResult Privacy()
     {
         return View();

@@ -1,12 +1,25 @@
 @model loja_s.Models.Produto
 
 @{
+    Layout = null;
     ViewData["Title"] = "Detalhes do Produto";
 }
 
-<link rel="stylesheet" href="~/css/produto.css" />
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/produto.css" asp-append-version="true">
+</head>
+<body>
+
+<header class="top-bar"></header>
 
 <div class="pagina-produto">
+    <a class="voltar-inicio" asp-controller="Home" asp-action="Index">← Voltar à página inicial</a>
 
     <!-- =========================
          PRODUTO
@@ -55,10 +68,6 @@
             <div class="preco">
                 R$ @Model.Preco.ToString("N2")
             </div>
-
-            <a class="link-avaliacoes" href="#avaliacoes">
-                Ver avaliações dos clientes
-            </a>
 
             <!-- QUANTIDADE -->
             <div class="quantidade-area">
@@ -131,7 +140,7 @@
         <div class="avaliacoes-titulo">
 
             <div class="icone-usuario">
-                <span>♟</span>
+                <span aria-hidden="true"></span>
             </div>
 
             <div class="linha-titulo">
@@ -145,7 +154,7 @@
         <article class="avaliacao">
 
             <div class="avatar">
-                <span>👤</span>
+                <span aria-hidden="true"></span>
             </div>
 
             <div class="avaliacao-conteudo">
@@ -201,7 +210,7 @@
         <article class="avaliacao">
 
             <div class="avatar">
-                <span>👤</span>
+                <span aria-hidden="true"></span>
             </div>
 
             <div class="avaliacao-conteudo">
@@ -233,7 +242,6 @@
     </section>
 
 </div>
-
 
 <script>
 
@@ -277,3 +285,6 @@
     }
 
 </script>
+
+</body>
+</html>

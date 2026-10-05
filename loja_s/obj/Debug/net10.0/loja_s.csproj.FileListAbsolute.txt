@@ -22,7 +22,6 @@ C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\scopedcss\
 C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\scopedcss\bundle\loja_s.styles.css
 C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\scopedcss\projectbundle\loja_s.bundle.scp.css
 C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\dqw2zecbry-{0}-61n19gt1b8-61n19gt1b8.gz
-C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\u6xdc6hgwf-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
 C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\3euuip4lpn-{0}-bqjiyaj88i-bqjiyaj88i.gz
 C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\i1smz17mk0-{0}-c2jlpeoesf-c2jlpeoesf.gz
 C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\bvbammd2eg-{0}-erw9l3u2r3-erw9l3u2r3.gz
@@ -95,8 +94,6 @@ C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\loja_s.pdb
 C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\loja_s.genruntimeconfig.cache
 C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\ref\loja_s.dll
 C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\fe3vtws5rx-{0}-6g8nbfus1m-6g8nbfus1m.gz
-C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\fsubi9y24n-{0}-nnug3zbd09-nnug3zbd09.gz
-C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\47l1zdf0re-{0}-y6lfwjq95r-y6lfwjq95r.gz
 C:\Users\ramir\AppData\Local\Temp\loja_s-build-check\appsettings.Development.json
 C:\Users\ramir\AppData\Local\Temp\loja_s-build-check\appsettings.json
 C:\Users\ramir\AppData\Local\Temp\loja_s-build-check\loja_s.staticwebassets.runtime.json
@@ -107,3 +104,79 @@ C:\Users\ramir\AppData\Local\Temp\loja_s-build-check\loja_s.dll
 C:\Users\ramir\AppData\Local\Temp\loja_s-build-check\loja_s.pdb
 c:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\yn1jpvmti3-{0}-ikq7vlac49-ikq7vlac49.gz
 C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\loja_s.sourcelink.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-build\appsettings.Development.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-build\appsettings.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-build\loja_s.staticwebassets.runtime.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-build\loja_s.staticwebassets.endpoints.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-build\loja_s.deps.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-build\loja_s.runtimeconfig.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-build\loja_s.dll
+C:\Users\ramir\AppData\Local\Temp\loja_s-build\loja_s.pdb
+C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\47l1zdf0re-{0}-9bvbog2vkx-9bvbog2vkx.gz
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-page-validation\appsettings.Development.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-page-validation\appsettings.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-page-validation\loja_s.staticwebassets.runtime.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-page-validation\loja_s.staticwebassets.endpoints.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-page-validation\loja_s.deps.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-page-validation\loja_s.runtimeconfig.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-page-validation\loja_s.dll
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-page-validation\loja_s.pdb
+C:\Users\ramir\AppData\Local\Temp\loja_s-products-validation\appsettings.Development.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-products-validation\appsettings.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-products-validation\loja_s.staticwebassets.runtime.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-products-validation\loja_s.staticwebassets.endpoints.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-products-validation\loja_s.deps.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-products-validation\loja_s.runtimeconfig.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-products-validation\loja_s.dll
+C:\Users\ramir\AppData\Local\Temp\loja_s-products-validation\loja_s.pdb
+C:\Users\ramir\AppData\Local\Temp\loja_s-return-link-validation\appsettings.Development.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-return-link-validation\appsettings.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-return-link-validation\loja_s.staticwebassets.runtime.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-return-link-validation\loja_s.staticwebassets.endpoints.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-return-link-validation\loja_s.deps.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-return-link-validation\loja_s.runtimeconfig.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-return-link-validation\loja_s.dll
+C:\Users\ramir\AppData\Local\Temp\loja_s-return-link-validation\loja_s.pdb
+C:\Users\ramir\AppData\Local\Temp\loja_s-grid-validation\appsettings.Development.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-grid-validation\appsettings.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-grid-validation\loja_s.staticwebassets.runtime.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-grid-validation\loja_s.staticwebassets.endpoints.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-grid-validation\loja_s.deps.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-grid-validation\loja_s.runtimeconfig.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-grid-validation\loja_s.dll
+C:\Users\ramir\AppData\Local\Temp\loja_s-grid-validation\loja_s.pdb
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-visual-validation\appsettings.Development.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-visual-validation\appsettings.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-visual-validation\loja_s.staticwebassets.runtime.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-visual-validation\loja_s.staticwebassets.endpoints.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-visual-validation\loja_s.deps.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-visual-validation\loja_s.runtimeconfig.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-visual-validation\loja_s.dll
+C:\Users\ramir\AppData\Local\Temp\loja_s-product-visual-validation\loja_s.pdb
+C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\ihj7qy5dli-{0}-tdrog1rtn0-tdrog1rtn0.gz
+C:\Users\ramir\AppData\Local\Temp\loja_s-carousel-validation\appsettings.Development.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-carousel-validation\appsettings.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-carousel-validation\loja_s.staticwebassets.runtime.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-carousel-validation\loja_s.staticwebassets.endpoints.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-carousel-validation\loja_s.deps.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-carousel-validation\loja_s.runtimeconfig.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-carousel-validation\loja_s.dll
+C:\Users\ramir\AppData\Local\Temp\loja_s-carousel-validation\loja_s.pdb
+C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\u6xdc6hgwf-{0}-gp9w74whqx-gp9w74whqx.gz
+C:\Users\ramir\AppData\Local\Temp\loja_s-banner-validation\appsettings.Development.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-banner-validation\appsettings.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-banner-validation\loja_s.staticwebassets.runtime.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-banner-validation\loja_s.staticwebassets.endpoints.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-banner-validation\loja_s.deps.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-banner-validation\loja_s.runtimeconfig.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-banner-validation\loja_s.dll
+C:\Users\ramir\AppData\Local\Temp\loja_s-banner-validation\loja_s.pdb
+C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\fsubi9y24n-{0}-1utqd8qp6l-1utqd8qp6l.gz
+C:\Users\ramir\AppData\Local\Temp\loja_s-nami-banner-validation\appsettings.Development.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-nami-banner-validation\appsettings.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-nami-banner-validation\loja_s.staticwebassets.runtime.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-nami-banner-validation\loja_s.staticwebassets.endpoints.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-nami-banner-validation\loja_s.deps.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-nami-banner-validation\loja_s.runtimeconfig.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-nami-banner-validation\loja_s.dll
+C:\Users\ramir\AppData\Local\Temp\loja_s-nami-banner-validation\loja_s.pdb
