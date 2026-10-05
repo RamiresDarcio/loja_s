@@ -342,3 +342,11 @@ C:\Users\ramir\AppData\Local\Temp\loja-s-account-build-verified\loja_s.deps.json
 C:\Users\ramir\AppData\Local\Temp\loja-s-account-build-verified\loja_s.runtimeconfig.json
 C:\Users\ramir\AppData\Local\Temp\loja-s-account-build-verified\loja_s.dll
 C:\Users\ramir\AppData\Local\Temp\loja-s-account-build-verified\loja_s.pdb
+C:\Users\ramir\AppData\Local\Temp\loja-s-account-release-check\appsettings.Development.json
+C:\Users\ramir\AppData\Local\Temp\loja-s-account-release-check\appsettings.json
+C:\Users\ramir\AppData\Local\Temp\loja-s-account-release-check\loja_s.staticwebassets.runtime.json
+C:\Users\ramir\AppData\Local\Temp\loja-s-account-release-check\loja_s.staticwebassets.endpoints.json
+C:\Users\ramir\AppData\Local\Temp\loja-s-account-release-check\loja_s.deps.json
+C:\Users\ramir\AppData\Local\Temp\loja-s-account-release-check\loja_s.runtimeconfig.json
+C:\Users\ramir\AppData\Local\Temp\loja-s-account-release-check\loja_s.dll
+C:\Users\ramir\AppData\Local\Temp\loja-s-account-release-check\loja_s.pdb
