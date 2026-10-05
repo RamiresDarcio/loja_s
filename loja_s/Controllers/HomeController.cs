@@ -26,6 +26,18 @@ public class HomeController : Controller
         return View("paginal_p");
     }
 
+    public IActionResult Produto()
+    {
+        var produto = new Produto
+        {
+            Nome = "Whey Protein",
+            Preco = 0,
+            Descricao = "Suplemento utilizado para complementar a alimentação com proteínas."
+        };
+
+        return View("produto", produto);
+    }
+
     public IActionResult Privacy()
     {
         return View();
