@@ -1,0 +1,5 @@
+@model bow.estoque.Models.Produto
+@{ ViewData["Title"] = "Detalhes do produto"; }
+<div class="page-header"><div><p class="eyebrow">Visualização</p><h1>@Model.Nome</h1></div></div>
+<div class="panel details-panel"><dl class="details-list"><div><dt>Id</dt><dd>@Model.Id</dd></div><div><dt>SKU</dt><dd>@Model.SKU</dd></div><div><dt>Código de barras</dt><dd>@Model.CodigoBarras</dd></div><div><dt>Categoria</dt><dd>@(Model.Categoria?.Nome ?? "-")</dd></div><div><dt>Fornecedor</dt><dd>@(Model.Fornecedor?.NomeFantasia ?? "-")</dd></div><div><dt>Preço de custo</dt><dd>R$ @Model.PrecoCusto.ToString("N2")</dd></div><div><dt>Preço de venda</dt><dd>R$ @Model.PrecoVenda.ToString("N2")</dd></div><div><dt>Estoque</dt><dd>@Model.QuantidadeEstoque</dd></div><div><dt>Estoque mínimo</dt><dd>@Model.EstoqueMinimo</dd></div><div><dt>Estoque máximo</dt><dd>@Model.EstoqueMaximo</dd></div><div><dt>Status</dt><dd>@Model.Status</dd></div><div><dt>Cadastro</dt><dd>@Model.DataCadastro.ToString("dd/MM/yyyy")</dd></div></dl></div>
+<div class="actions-row"><a asp-action="Edit" asp-route-id="@Model.Id" class="btn primary">Editar</a><a asp-action="Index" class="btn">Voltar</a></div>

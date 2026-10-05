@@ -186,5 +186,5 @@ C:\Users\ramir\AppData\Local\Temp\loja_s-product-images-validation\loja_s.deps.j
 C:\Users\ramir\AppData\Local\Temp\loja_s-product-images-validation\loja_s.runtimeconfig.json
 C:\Users\ramir\AppData\Local\Temp\loja_s-product-images-validation\loja_s.dll
 C:\Users\ramir\AppData\Local\Temp\loja_s-product-images-validation\loja_s.pdb
-C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\fsubi9y24n-{0}-ay9y3psr62-ay9y3psr62.gz
 C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\ihj7qy5dli-{0}-6wfrz2lufe-6wfrz2lufe.gz
+C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\fsubi9y24n-{0}-96qkl35zfk-96qkl35zfk.gz

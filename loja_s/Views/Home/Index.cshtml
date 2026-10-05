@@ -16,14 +16,45 @@
 
     <!-- Cabeçalho -->
     <header class="header">
-        <div class="logo">logo</div>
-        <div class="search-bar">
-            <input type="text">
-            <button class="search-btn"></button>
-        </div>
+        <a class="logo" asp-controller="Home" asp-action="Index" aria-label="Suplementos — página inicial">
+            <span class="logo-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M13.2 2.5 5.8 13h5.1l-.6 8.5L18.2 11h-5.1l.1-8.5Z" />
+                </svg>
+            </span>
+            <span class="logo-copy">
+                <strong>SUPLEMENTOS</strong>
+                <small>FORÇA PARA SUA ROTINA</small>
+            </span>
+        </a>
+
+        <form class="search-bar" role="search" action="#" method="get">
+            <label class="visually-hidden" for="product-search">Buscar produtos</label>
+            <input id="product-search" name="q" type="search" placeholder="O que você está procurando?">
+            <button class="search-btn" type="submit" aria-label="Buscar">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="10.8" cy="10.8" r="6.3" />
+                    <path d="m15.5 15.5 4.2 4.2" />
+                </svg>
+            </button>
+        </form>
+
         <div class="user-actions">
-            <a asp-controller="Home" asp-action="Login" class="icon-user">👤</a>
-            <a href="#" class="icon-cart">🛒</a>
+            <a asp-controller="Home" asp-action="Login" class="header-action icon-user">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="12" cy="8" r="3.5" />
+                    <path d="M5.2 20c.5-3.6 3.2-5.6 6.8-5.6s6.3 2 6.8 5.6" />
+                </svg>
+                <span>Minha conta</span>
+            </a>
+            <a href="#" class="header-action icon-cart" aria-label="Carrinho de compras">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 1.9-1.5L21 8H6" />
+                    <circle cx="9.5" cy="20" r="1.2" />
+                    <circle cx="18" cy="20" r="1.2" />
+                </svg>
+                <span>Carrinho</span>
+            </a>
         </div>
     </header>
 
@@ -163,16 +194,58 @@
             </div>
         </article>
     </main>
-    <!-- Rodapé -->
     <footer class="footer">
-        <div class="payment-methods">💳 Métodos de Pagamento</div>
-        <div class="footer-info">
-            <h3>Informações</h3>
+        <div class="footer-shell">
+            <div class="footer-brand">
+                <a class="logo footer-logo" asp-controller="Home" asp-action="Index" aria-label="Suplementos — página inicial">
+                    <span class="logo-mark" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false">
+                            <path d="M13.2 2.5 5.8 13h5.1l-.6 8.5L18.2 11h-5.1l.1-8.5Z" />
+                        </svg>
+                    </span>
+                    <span class="logo-copy">
+                        <strong>SUPLEMENTOS</strong>
+                        <small>FORÇA PARA SUA ROTINA</small>
+                    </span>
+                </a>
+                <p>Produtos pensados para reforçar sua rotina, melhorar o desempenho e te manter em movimento.</p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Loja</h3>
+                <ul>
+                    <li><a href="#">Whey Protein</a></li>
+                    <li><a href="#">Creatina</a></li>
+                    <li><a href="#">Pré-treino</a></li>
+                    <li><a href="#">Vitaminas</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Atendimento</h3>
+                <ul>
+                    <li><a href="tel:+5561999999999">(61) 99999-9999</a></li>
+                    <li><a href="mailto:atendimento@suplementos.com.br">atendimento@suplementos.com.br</a></li>
+                    <li><a href="#">Trocas e devoluções</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Pagamento</h3>
+                <div class="payment-methods" aria-label="Métodos de pagamento">
+                    <span>Visa</span>
+                    <span>Mastercard</span>
+                    <span>Pix</span>
+                    <span>Boleto</span>
+                </div>
+            </div>
         </div>
-        <div class="footer-contact">
-            <h3>central de atendimentos</h3>
-            <p>61 99999-9999</p>
-            <p>e-mail</p>
+
+        <div class="footer-bottom">
+            <span>© 2026 Suplementos</span>
+            <a href="#">Termos e condições</a>
+            <a href="#">Política de privacidade</a>
         </div>
     </footer>
 

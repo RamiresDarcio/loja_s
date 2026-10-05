@@ -1,0 +1,6 @@
+@model bow.estoque.Models.Cliente
+@{ ViewData["Title"] = "Detalhes do cliente"; }
+<div class="page-header"><div><p class="eyebrow">Cliente</p><h1>@Model.Nome</h1></div></div>
+<div class="panel details-panel"><dl class="details-list"><div><dt>CPF</dt><dd>@Model.CPF</dd></div><div><dt>Email</dt><dd>@Model.Email</dd></div><div><dt>Telefone</dt><dd>@Model.Telefone</dd></div><div><dt>Endereço</dt><dd>@Model.Endereco, @Model.Numero - @Model.Cidade/@Model.Estado</dd></div><div><dt>Status</dt><dd>@Model.Status</dd></div></dl></div>
+<h2>Histórico de compras</h2>
+<table class="data-table"><thead><tr><th>Venda</th><th>Data</th><th>Total</th><th>Status</th></tr></thead><tbody>@foreach(var item in (IEnumerable<bow.estoque.Models.Venda>)ViewBag.HistoricoCompras){<tr><td>@item.Id</td><td>@item.Data.ToString("dd/MM/yyyy")</td><td>R$ @item.Total.ToString("N2")</td><td>@item.Status</td></tr>}</tbody></table>

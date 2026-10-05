@@ -1,0 +1,30 @@
+@model bow.estoque.ViewModels.DashboardViewModel
+@{ ViewData["Title"] = "Dashboard Administrativo"; }
+<div class="page-header"><div><p class="eyebrow">Painel principal</p><h1>Dashboard Administrativo</h1></div></div>
+<div class="stats-grid">
+    <div class="stat-card"><span>Total de produtos</span><strong>@Model.TotalProdutos</strong></div>
+    <div class="stat-card"><span>Produtos em estoque</span><strong>@Model.ProdutosEmEstoque</strong></div>
+    <div class="stat-card warning"><span>Estoque baixo</span><strong>@Model.EstoqueBaixo</strong></div>
+    <div class="stat-card danger"><span>Produtos sem estoque</span><strong>@Model.ProdutosSemEstoque</strong></div>
+    <div class="stat-card neutral"><span>Vendas</span><strong>@Model.TotalVendas</strong></div>
+    <div class="stat-card accent"><span>Faturamento</span><strong>R$ @Model.Faturamento.ToString("N2")</strong></div>
+</div>
+<div class="charts-grid">
+    <div class="panel"><h3>Vendas</h3><canvas id="vendasChart" height="160"></canvas></div>
+    <div class="panel"><h3>Produtos mais vendidos</h3><canvas id="produtosChart" height="160"></canvas></div>
+    <div class="panel"><h3>Estoque</h3><canvas id="estoqueChart" height="160"></canvas></div>
+</div>
+@section Scripts {
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const vendasLabels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.VendasPorMes));
+const vendasData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.QuantidadeVendasPorMes));
+const produtosLabels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ProdutosMaisVendidos));
+const produtosData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.QuantidadeVendidaPorProduto));
+const estoqueLabels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ProdutosEstoque));
+const estoqueData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.QuantidadeEstoqueAtual));
+new Chart(document.getElementById('vendasChart'), { type: 'line', data: { labels: vendasLabels, datasets: [{ label: 'Vendas', data: vendasData, borderColor: '#5b76f2', backgroundColor: 'rgba(91,118,242,0.18)', fill: true, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false } });
+new Chart(document.getElementById('produtosChart'), { type: 'bar', data: { labels: produtosLabels, datasets: [{ label: 'Quantidade vendida', data: produtosData, backgroundColor: '#ff5a5a' }] }, options: { responsive: true, maintainAspectRatio: false } });
+new Chart(document.getElementById('estoqueChart'), { type: 'bar', data: { labels: estoqueLabels, datasets: [{ label: 'Estoque atual', data: estoqueData, backgroundColor: '#2bb673' }] }, options: { responsive: true, maintainAspectRatio: false } });
+</script>
+}

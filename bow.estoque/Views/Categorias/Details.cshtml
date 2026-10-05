@@ -1,0 +1,3 @@
+@model bow.estoque.Models.Categoria
+@{ ViewData["Title"] = "Detalhes da categoria"; }
+<div class="panel details-panel"><h1>@Model.Nome</h1><dl class="details-list"><div><dt>Id</dt><dd>@Model.Id</dd></div><div><dt>Descrição</dt><dd>@Model.Descricao</dd></div><div><dt>Status</dt><dd>@Model.Status</dd></div><div><dt>Data de cadastro</dt><dd>@Model.DataCadastro.ToString("dd/MM/yyyy")</dd></div></dl></div>

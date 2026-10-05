@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - bow.estoque</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="app-header">
+        <div class="container topbar">
+            <div class="brand-box">
+                <div class="brand-mark">B</div>
+                <div>
+                    <strong>bow.estoque</strong>
+                    <small>Painel administrativo</small>
+                </div>
+            </div>
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <nav class="main-nav" aria-label="Navegação principal">
+                    <a asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                    <a asp-controller="Produtos" asp-action="Index">Produtos</a>
+                    <a asp-controller="Categorias" asp-action="Index">Categorias</a>
+                    <a asp-controller="Fornecedores" asp-action="Index">Fornecedores</a>
+                    <a asp-controller="Clientes" asp-action="Index">Clientes</a>
+                    <a asp-controller="Estoque" asp-action="Index">Estoque</a>
+                    <a asp-controller="HistoricoEstoque" asp-action="Index">Histórico</a>
+                    <a asp-controller="Vendas" asp-action="Index">Vendas</a>
+                </nav>
+                <div class="user-area">
+                    <span>Olá, @User.Identity.Name</span>
+                    <a asp-controller="Account" asp-action="Logout" class="btn btn-light">Sair</a>
+                </div>
+            }
+        </div>
+    </header>
+
+    <main class="app-main">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert success">@TempData["SuccessMessage"]</div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert error">@TempData["ErrorMessage"]</div>
+        }
+        @RenderBody()
+    </main>
+
+    <footer class="app-footer">
+        <div class="container"><span>© 2026 bow.estoque</span><span>Sistema de gerenciamento de estoque</span></div>
+    </footer>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

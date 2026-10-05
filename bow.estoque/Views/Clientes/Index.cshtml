@@ -1,0 +1,5 @@
+@model IEnumerable<bow.estoque.Models.Cliente>
+@{ ViewData["Title"] = "Clientes"; }
+<div class="page-header"><div><p class="eyebrow">Cadastro</p><h1>Clientes</h1></div><a asp-action="Create" class="btn primary">Novo cliente</a></div>
+<form method="get" class="toolbar"><input type="text" name="search" value="@Context.Request.Query["search"]" placeholder="Pesquisar cliente" /><button type="submit" class="btn primary">Buscar</button></form>
+<table class="data-table"><thead><tr><th>Id</th><th>Nome</th><th>CPF</th><th>Email</th><th>Status</th><th>Ações</th></tr></thead><tbody>@foreach(var item in Model){<tr><td>@item.Id</td><td>@item.Nome</td><td>@item.CPF</td><td>@item.Email</td><td><span class="badge @((item.Status == "Ativo" ? "success" : "muted"))">@item.Status</span></td><td class="actions"><a asp-action="Details" asp-route-id="@item.Id" class="btn small">Detalhes</a> <a asp-action="Edit" asp-route-id="@item.Id" class="btn small">Editar</a></td></tr>}</tbody></table>

@@ -1,0 +1,36 @@
+@model bow.estoque.ViewModels.LoginViewModel
+@{ ViewData["Title"] = "Login"; Layout = null; }
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - bow.estoque</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="login-page">
+    <div class="login-box">
+        <div class="login-header">
+            <div class="brand-mark login-mark">B</div>
+            <h1>Login</h1>
+        </div>
+        <form asp-action="Login" method="post" class="form-card">
+            <div class="form-group">
+                <label asp-for="Usuario">Usuário</label>
+                <input asp-for="Usuario" />
+                <span asp-validation-for="Usuario" class="field-validation-error"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Senha">Senha</label>
+                <input asp-for="Senha" type="password" />
+                <span asp-validation-for="Senha" class="field-validation-error"></span>
+            </div>
+            <button type="submit" class="btn primary full">Entrar</button>
+        </form>
+        <div class="login-note"><strong>Credenciais de desenvolvimento:</strong><br />Usuário: <strong>adm2020</strong><br />Senha: <strong>adm12345</strong></div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
