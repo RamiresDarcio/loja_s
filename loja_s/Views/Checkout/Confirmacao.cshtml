@@ -1,0 +1,33 @@
+@model loja_s.Models.Pedido
+@{
+    ViewData["Title"] = "Pedido confirmado";
+}
+
+<div class="checkout-shell">
+    <div class="checkout-section confirmation-box">
+        <h1>Compra realizada com sucesso</h1>
+        <p><strong>Número do pedido:</strong> @Model.NumeroPedido</p>
+        <p><strong>Data:</strong> @Model.DataPedido.ToString("dd/MM/yyyy")</p>
+        <p><strong>Forma de pagamento:</strong> @Model.FormaPagamento</p>
+        <p><strong>Status do pagamento:</strong> @Model.StatusPagamento</p>
+        <p><strong>Status do pedido:</strong> @Model.Status</p>
+        <p><strong>Valor total:</strong> R$ @Model.ValorTotal.ToString("N2")</p>
+
+        <div class="confirmation-products">
+            @foreach (var item in Model.Itens)
+            {
+                <div class="summary-item">
+                    <span>@item.NomeProduto x @item.Quantidade</span>
+                    <strong>R$ @item.Subtotal.ToString("N2")</strong>
+                </div>
+            }
+        </div>
+
+        <div class="confirmation-actions">
+            <a asp-controller="Pedido" asp-action="MeusPedidos" class="primary-btn">Ver meus pedidos</a>
+            <a asp-controller="Home" asp-action="Index" class="secondary-btn">Continuar comprando</a>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/css/checkout.css" asp-append-version="true" />

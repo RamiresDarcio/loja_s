@@ -1,0 +1,35 @@
+@model loja_s.ViewModels.LoginContaViewModel
+@{
+    ViewData["Title"] = "Entrar";
+}
+
+<section class="auth-card">
+    <div class="auth-copy">
+        <p class="account-eyebrow">Área do cliente</p>
+        <h1>Boas-vindas de volta</h1>
+        <p>Acesse sua conta para acompanhar pedidos, endereços e favoritos.</p>
+    </div>
+    <form asp-action="Login" method="post" class="account-form">
+        <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+        <input asp-for="ReturnUrl" type="hidden" />
+        <div class="account-field">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" autocomplete="email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div class="account-field">
+            <label asp-for="Senha"></label>
+            <input asp-for="Senha" autocomplete="current-password" />
+            <span asp-validation-for="Senha"></span>
+        </div>
+        <label class="account-checkbox">
+            <input asp-for="ManterConectado" />
+            <span>Manter conectado</span>
+        </label>
+        <button class="account-button primary" type="submit">Entrar</button>
+        <div class="auth-links">
+            <a asp-action="EsqueciSenha">Esqueci minha senha</a>
+            <a asp-action="Cadastro" asp-route-returnUrl="@Model.ReturnUrl">Criar minha conta</a>
+        </div>
+    </form>
+</section>

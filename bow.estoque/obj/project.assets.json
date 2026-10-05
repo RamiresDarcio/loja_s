@@ -3806,11 +3806,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj",
+      "projectUniqueName": "c:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj",
       "projectName": "bow.estoque",
-      "projectPath": "C:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj",
+      "projectPath": "c:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj",
       "packagesPath": "C:\\Users\\ramir\\.nuget\\packages\\",
-      "outputPath": "C:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\obj\\",
+      "outputPath": "c:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ramir\\AppData\\Roaming\\NuGet\\NuGet.Config"

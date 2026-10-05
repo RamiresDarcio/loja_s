@@ -1,0 +1,51 @@
+@model loja_s.ViewModels.AlterarSenhaViewModel
+@{
+    ViewData["Title"] = "Login e segurança";
+    var sessions = ViewBag.Sessoes as IEnumerable<loja_s.Models.SessaoConta> ?? [];
+    var currentSession = ViewBag.SessaoAtual as string;
+}
+<div class="account-page-heading">
+    <div><p class="account-eyebrow">Minha conta</p><h1>Login e segurança</h1></div>
+    <a class="account-button secondary" asp-action="MinhaConta">Voltar à conta</a>
+</div>
+<section class="account-panel">
+    <h2>Alterar senha</h2>
+    <form asp-action="AlterarSenha" method="post" class="account-form narrow-form">
+        <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+        <div class="account-field"><label asp-for="SenhaAtual"></label><input asp-for="SenhaAtual" autocomplete="current-password" /><span asp-validation-for="SenhaAtual"></span></div>
+        <div class="account-field"><label asp-for="NovaSenha"></label><input asp-for="NovaSenha" autocomplete="new-password" /><span asp-validation-for="NovaSenha"></span></div>
+        <div class="account-field"><label asp-for="ConfirmarSenha"></label><input asp-for="ConfirmarSenha" autocomplete="new-password" /><span asp-validation-for="ConfirmarSenha"></span></div>
+        <button class="account-button primary" type="submit">Atualizar senha</button>
+    </form>
+</section>
+<section class="account-panel">
+    <div class="panel-heading">
+        <div><h2>Confirmação de e-mail</h2><p>Status: <strong>@((bool)ViewBag.EmailConfirmado ? "Confirmado" : "Pendente")</strong></p></div>
+        @if (!(bool)ViewBag.EmailConfirmado)
+        {
+            <form asp-action="ReenviarConfirmacaoEmail" method="post"><button class="account-button secondary" type="submit">Enviar link de confirmação</button></form>
+        }
+    </div>
+</section>
+<section class="account-panel">
+    <div class="panel-heading">
+        <div><h2>Dispositivos conectados</h2><p>Encerre individualmente as outras sessões da sua conta.</p></div>
+        @if (sessions.Count(s => s.ChaveSessao != currentSession) > 0)
+        {
+            <form asp-action="EncerrarOutrasSessoes" method="post"><button class="account-button secondary" type="submit">Encerrar outras sessões</button></form>
+        }
+    </div>
+    <div class="session-list">
+        @foreach (var session in sessions)
+        {
+            <article class="session-entry">
+                <div><strong>@(session.ChaveSessao == currentSession ? "Este dispositivo" : "Dispositivo conectado")</strong><p>@(string.IsNullOrWhiteSpace(session.Dispositivo) ? "Dispositivo não identificado" : session.Dispositivo)</p></div>
+                <small>Última atividade: @session.UltimaAtividade.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</small>
+            </article>
+        }
+    </div>
+</section>
+<section class="account-panel">
+    <h2>Autenticação em dois fatores</h2>
+    <p>A autenticação em dois fatores ainda não está habilitada nesta versão.</p>
+</section>

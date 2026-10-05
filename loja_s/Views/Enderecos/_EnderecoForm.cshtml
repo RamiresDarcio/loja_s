@@ -1,0 +1,14 @@
+@model loja_s.ViewModels.EnderecoContaViewModel
+<div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+<div class="account-form-grid">
+    <div class="account-field"><label asp-for="Nome"></label><input asp-for="Nome" autocomplete="name" /><span asp-validation-for="Nome"></span></div>
+    <div class="account-field"><label asp-for="CEP"></label><input asp-for="CEP" autocomplete="postal-code" /><span asp-validation-for="CEP"></span></div>
+    <div class="account-field"><label asp-for="Rua"></label><input asp-for="Rua" autocomplete="address-line1" /><span asp-validation-for="Rua"></span></div>
+    <div class="account-field"><label asp-for="Numero"></label><input asp-for="Numero" /><span asp-validation-for="Numero"></span></div>
+    <div class="account-field"><label asp-for="Complemento"></label><input asp-for="Complemento" /></div>
+    <div class="account-field"><label asp-for="Bairro"></label><input asp-for="Bairro" /><span asp-validation-for="Bairro"></span></div>
+    <div class="account-field"><label asp-for="Cidade"></label><input asp-for="Cidade" autocomplete="address-level2" /><span asp-validation-for="Cidade"></span></div>
+    <div class="account-field"><label asp-for="Estado"></label><input asp-for="Estado" autocomplete="address-level1" maxlength="2" /><span asp-validation-for="Estado"></span></div>
+    <div class="account-field"><label asp-for="Pais"></label><input asp-for="Pais" autocomplete="country-name" /><span asp-validation-for="Pais"></span></div>
+</div>
+<label class="account-checkbox"><input asp-for="Principal" /><span>Definir como endereço principal</span></label>

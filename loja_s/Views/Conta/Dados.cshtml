@@ -1,0 +1,23 @@
+@model loja_s.ViewModels.DadosContaViewModel
+@{
+    ViewData["Title"] = "Meus dados";
+}
+<div class="account-page-heading">
+    <div><p class="account-eyebrow">Minha conta</p><h1>Meus dados</h1></div>
+    <a class="account-button secondary" asp-action="MinhaConta">Voltar à conta</a>
+</div>
+<section class="account-panel">
+    <form asp-action="Dados" method="post" class="account-form">
+        <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+        <div class="account-form-grid">
+            <div class="account-field"><label asp-for="Nome"></label><input asp-for="Nome" autocomplete="given-name" /><span asp-validation-for="Nome"></span></div>
+            <div class="account-field"><label asp-for="Sobrenome"></label><input asp-for="Sobrenome" autocomplete="family-name" /><span asp-validation-for="Sobrenome"></span></div>
+            <div class="account-field"><label asp-for="Email"></label><input asp-for="Email" autocomplete="email" /><span asp-validation-for="Email"></span></div>
+            <div class="account-field"><label asp-for="Telefone"></label><input asp-for="Telefone" autocomplete="tel" /><span asp-validation-for="Telefone"></span></div>
+            <div class="account-field"><label asp-for="DataNascimento"></label><input asp-for="DataNascimento" /><span asp-validation-for="DataNascimento"></span></div>
+            <div class="account-field"><label asp-for="CPF"></label><input asp-for="CPF" autocomplete="off" /><span asp-validation-for="CPF"></span></div>
+            <div class="account-field full-field"><label asp-for="SenhaAtual"></label><input asp-for="SenhaAtual" autocomplete="current-password" /><span asp-validation-for="SenhaAtual"></span><small>Confirme sua identidade ao alterar e-mail ou CPF.</small></div>
+        </div>
+        <button class="account-button primary" type="submit">Salvar alterações</button>
+    </form>
+</section>

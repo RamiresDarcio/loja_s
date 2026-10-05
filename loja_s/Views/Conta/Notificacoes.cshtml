@@ -1,0 +1,19 @@
+@model loja_s.ViewModels.PreferenciasNotificacaoViewModel
+@{
+    ViewData["Title"] = "Notificações";
+}
+<div class="account-page-heading">
+    <div><p class="account-eyebrow">Minha conta</p><h1>Preferências de notificações</h1></div>
+    <a class="account-button secondary" asp-action="MinhaConta">Voltar à conta</a>
+</div>
+<section class="account-panel">
+    <form asp-action="Notificacoes" method="post" class="account-form">
+        <p>Escolha as categorias de comunicação que deseja receber.</p>
+        <label class="account-checkbox"><input asp-for="AtualizacoesPedidos" /><span>@Html.DisplayNameFor(m => m.AtualizacoesPedidos)</span></label>
+        <label class="account-checkbox"><input asp-for="Promocoes" /><span>@Html.DisplayNameFor(m => m.Promocoes)</span></label>
+        <label class="account-checkbox"><input asp-for="Novidades" /><span>@Html.DisplayNameFor(m => m.Novidades)</span></label>
+        <label class="account-checkbox"><input asp-for="ProdutosFavoritos" /><span>@Html.DisplayNameFor(m => m.ProdutosFavoritos)</span></label>
+        <label class="account-checkbox"><input asp-for="AlertasSeguranca" /><span>@Html.DisplayNameFor(m => m.AlertasSeguranca)</span></label>
+        <button class="account-button primary" type="submit">Salvar preferências</button>
+    </form>
+</section>

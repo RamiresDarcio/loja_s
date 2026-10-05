@@ -1,0 +1,39 @@
+@model List<loja_s.Models.Pedido>
+@{
+    ViewData["Title"] = "Administração de pedidos";
+}
+
+<div class="checkout-shell">
+    <div class="checkout-section">
+        <h1>Pedidos</h1>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Número</th>
+                    <th>Cliente</th>
+                    <th>Data</th>
+                    <th>Forma de pagamento</th>
+                    <th>Valor</th>
+                    <th>Status pagamento</th>
+                    <th>Status pedido</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pedido in Model)
+                {
+                    <tr>
+                        <td>@pedido.NumeroPedido</td>
+                        <td>@(pedido.Usuario?.Nome ?? "Cliente")</td>
+                        <td>@pedido.DataPedido.ToString("dd/MM/yyyy")</td>
+                        <td>@pedido.FormaPagamento</td>
+                        <td>R$ @pedido.ValorTotal.ToString("N2")</td>
+                        <td>@pedido.StatusPagamento</td>
+                        <td>@pedido.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/css/checkout.css" asp-append-version="true" />

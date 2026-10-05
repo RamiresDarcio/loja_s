@@ -1,0 +1,12 @@
+@model loja_s.ViewModels.RecuperarSenhaViewModel
+@{
+    ViewData["Title"] = "Recuperar senha";
+}
+<section class="auth-card">
+    <div class="auth-copy"><p class="account-eyebrow">Acesso seguro</p><h1>Esqueceu sua senha?</h1><p>Informe seu e-mail. Se houver uma conta ativa, enviaremos um link temporário.</p></div>
+    <form asp-action="EsqueciSenha" method="post" class="account-form">
+        <div class="account-field"><label asp-for="Email"></label><input asp-for="Email" autocomplete="email" /><span asp-validation-for="Email"></span></div>
+        <button class="account-button primary" type="submit">Enviar link</button>
+        <a asp-action="Login" class="text-link">Voltar para entrar</a>
+    </form>
+</section>

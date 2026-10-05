@@ -1,0 +1,37 @@
+@model IEnumerable<loja_s.Models.Favorito>
+@{
+    ViewData["Title"] = "Meus favoritos";
+}
+<div class="account-page-heading">
+    <div><p class="account-eyebrow">Minha conta</p><h1>Meus favoritos</h1></div>
+    <a class="account-button secondary" asp-controller="Conta" asp-action="MinhaConta">Voltar à conta</a>
+</div>
+<section class="product-account-grid">
+    @if (!Model.Any())
+    {
+        <div class="account-empty"><h2>Sua lista está vazia</h2><p>Salve produtos para encontrá-los facilmente depois.</p><a class="account-button primary" asp-controller="Home" asp-action="Index">Explorar a loja</a></div>
+    }
+    @foreach (var favorite in Model)
+    {
+        var available = favorite.Produto.Status == "Ativo" && favorite.Produto.Estoque > 0;
+        <article class="account-product-card">
+            @if (!string.IsNullOrWhiteSpace(favorite.Produto.ImagemUrl))
+            {
+                <img src="@Url.Content(favorite.Produto.ImagemUrl)" alt="@favorite.Produto.Nome" />
+            }
+            <div class="product-card-copy">
+                <h2>@favorite.Produto.Nome</h2>
+                <p class="account-price">R$ @favorite.Produto.Preco.ToString("N2")</p>
+                <span class="availability @(available ? "available" : "unavailable")">@(available ? "Disponível" : "Indisponível")</span>
+                <div class="account-actions">
+                    <a class="account-button secondary" asp-controller="Home" asp-action="VerProduto" asp-route-id="@favorite.ProdutoId">Ver produto</a>
+                    @if (available)
+                    {
+                        <form asp-action="AdicionarAoCarrinho" method="post"><input type="hidden" name="id" value="@favorite.Id" /><button class="account-button primary" type="submit">Adicionar ao carrinho</button></form>
+                    }
+                    <form asp-action="Remover" method="post"><input type="hidden" name="id" value="@favorite.Id" /><button class="account-button danger" type="submit">Remover</button></form>
+                </div>
+            </div>
+        </article>
+    }
+</section>

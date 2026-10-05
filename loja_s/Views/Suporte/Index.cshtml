@@ -1,0 +1,37 @@
+@model IEnumerable<loja_s.Models.SolicitacaoSuporte>
+@{
+    ViewData["Title"] = "Central de atendimento";
+    var categories = ViewBag.Categorias as IEnumerable<string> ?? [];
+}
+<div class="account-page-heading">
+    <div><p class="account-eyebrow">Ajuda</p><h1>Central de atendimento</h1></div>
+    <a class="account-button secondary" asp-controller="Conta" asp-action="MinhaConta">Voltar à conta</a>
+</div>
+<section class="account-panel">
+    <h2>Como podemos ajudar?</h2>
+    <form asp-action="Criar" method="post" class="account-form">
+        <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+        <div class="account-form-grid">
+            <div class="account-field"><label for="Categoria">Categoria</label><select id="Categoria" name="Categoria"><option value="">Selecione</option>@foreach (var category in categories) { <option value="@category">@category</option> }</select><span class="field-error">@Html.ValidationMessage("Categoria")</span></div>
+            <div class="account-field"><label for="Assunto">Assunto</label><input id="Assunto" name="Assunto" maxlength="120" required /><span class="field-error">@Html.ValidationMessage("Assunto")</span></div>
+            <div class="account-field full-field"><label for="Mensagem">Descreva sua solicitação</label><textarea id="Mensagem" name="Mensagem" rows="5" minlength="10" maxlength="3000" required></textarea><span class="field-error">@Html.ValidationMessage("Mensagem")</span></div>
+        </div>
+        <button class="account-button primary" type="submit">Enviar solicitação</button>
+    </form>
+</section>
+<section class="account-panel">
+    <h2>Minhas solicitações</h2>
+    @if (!Model.Any())
+    {
+        <p>Você ainda não abriu solicitações.</p>
+    }
+    else
+    {
+        <div class="responsive-table-wrap"><table class="account-table"><thead><tr><th>Data</th><th>Categoria</th><th>Assunto</th><th>Status</th></tr></thead><tbody>
+        @foreach (var request in Model)
+        {
+            <tr><td>@request.DataCriacao.ToLocalTime().ToString("dd/MM/yyyy")</td><td>@request.Categoria</td><td>@request.Assunto</td><td>@request.Status</td></tr>
+        }
+        </tbody></table></div>
+    }
+</section>

@@ -40,14 +40,19 @@
         </form>
 
         <div class="user-actions">
-            <a asp-controller="Home" asp-action="Login" class="header-action icon-user">
+            <a asp-controller="Conta"
+               asp-action="@(User.Identity?.IsAuthenticated == true ? "MinhaConta" : "Login")" class="header-action icon-user">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <circle cx="12" cy="8" r="3.5" />
                     <path d="M5.2 20c.5-3.6 3.2-5.6 6.8-5.6s6.3 2 6.8 5.6" />
                 </svg>
                 <span>Minha conta</span>
             </a>
-            <a href="#" class="header-action icon-cart" aria-label="Carrinho de compras">
+            <a asp-controller="Favoritos" asp-action="Index" class="header-action">
+                <span aria-hidden="true">♡</span>
+                <span>Favoritos</span>
+            </a>
+            <a asp-controller="Carrinho" asp-action="Index" class="header-action icon-cart" aria-label="Carrinho de compras">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 1.9-1.5L21 8H6" />
                     <circle cx="9.5" cy="20" r="1.2" />

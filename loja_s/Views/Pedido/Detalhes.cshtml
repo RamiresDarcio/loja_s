@@ -1,0 +1,45 @@
+@model loja_s.Models.Pedido
+@{
+    ViewData["Title"] = "Detalhes do pedido";
+}
+
+<div class="account-page-heading">
+    <div><p class="account-eyebrow">Pedido #@Model.NumeroPedido</p><h1>Detalhes do pedido</h1></div>
+    <a class="account-button secondary" asp-action="MeusPedidos">Voltar aos pedidos</a>
+</div>
+<section class="account-panel">
+        <dl class="order-details-grid">
+            <div><dt>Data</dt><dd>@Model.DataPedido.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</dd></div>
+            <div><dt>Status do pedido</dt><dd>@Model.Status</dd></div>
+            <div><dt>Forma de pagamento</dt><dd>@Model.FormaPagamento</dd></div>
+            <div><dt>Status do pagamento</dt><dd>@Model.StatusPagamento</dd></div>
+        </dl>
+        <h2>Andamento do pedido</h2>
+        <ol class="order-timeline">
+            @{
+                var paid = Model.StatusPagamento == "Pago" || Model.Status == "Finalizado" || Model.Status == "Entregue";
+                var cancelled = Model.Status == "Cancelado";
+            }
+            <li class="complete"><span>Pedido realizado</span><small>@Model.DataPedido.ToLocalTime().ToString("dd/MM/yyyy")</small></li>
+            <li class="@(paid ? "complete" : cancelled ? "cancelled" : "pending")"><span>@(cancelled ? "Pedido cancelado" : paid ? "Pagamento aprovado" : "Aguardando pagamento")</span></li>
+            <li class="@(Model.Status == "Preparando pedido" || Model.Status == "Enviado" || Model.Status == "Em transporte" || Model.Status == "Entregue" ? "complete" : "pending")"><span>Preparando pedido</span></li>
+            <li class="@(Model.Status == "Enviado" || Model.Status == "Em transporte" || Model.Status == "Entregue" ? "complete" : "pending")"><span>Enviado</span></li>
+            <li class="@(Model.Status == "Em transporte" || Model.Status == "Entregue" ? "complete" : "pending")"><span>Em transporte</span></li>
+            <li class="@(Model.Status == "Entregue" ? "complete" : "pending")"><span>Entregue</span></li>
+        </ol>
+        <h2>Produtos</h2>
+        @foreach (var item in Model.Itens)
+        {
+            <div class="order-product-row"><span>@item.NomeProduto × @item.Quantidade</span><strong>R$ @item.Subtotal.ToString("N2")</strong></div>
+        }
+        <div class="order-total-row"><span>Subtotal</span><strong>R$ @Model.Subtotal.ToString("N2")</strong></div>
+        <div class="order-total-row"><span>Frete</span><strong>R$ @Model.Frete.ToString("N2")</strong></div>
+        <div class="order-total-row"><span>Desconto</span><strong>R$ @Model.Desconto.ToString("N2")</strong></div>
+        <div class="order-total-row final"><span>Total</span><strong>R$ @Model.ValorTotal.ToString("N2")</strong></div>
+        @if (Model.EnderecoEntrega != null)
+        {
+            <h2>Endereço de entrega</h2>
+            <p>@Model.EnderecoEntrega.Rua, @Model.EnderecoEntrega.Numero @Model.EnderecoEntrega.Complemento</p>
+            <p>@Model.EnderecoEntrega.Bairro, @Model.EnderecoEntrega.Cidade - @Model.EnderecoEntrega.Estado, @Model.EnderecoEntrega.CEP</p>
+        }
+</section>

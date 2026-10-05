@@ -1,0 +1,44 @@
+@model loja_s.Models.Pedido
+@{
+    ViewData["Title"] = "Pagamento cartão";
+}
+
+<div class="checkout-shell">
+    <div class="checkout-section">
+        <h1>Pagamento com cartão</h1>
+        <form class="checkout-form">
+            <div class="form-grid two-col">
+                <div class="field">
+                    <label>Número do cartão</label>
+                    <input type="text" placeholder="0000 0000 0000 0000" />
+                </div>
+                <div class="field">
+                    <label>Nome do titular</label>
+                    <input type="text" />
+                </div>
+                <div class="field">
+                    <label>Validade</label>
+                    <input type="text" placeholder="MM/AA" />
+                </div>
+                <div class="field">
+                    <label>CVV</label>
+                    <input type="password" maxlength="4" />
+                </div>
+                <div class="field">
+                    <label>Parcelas</label>
+                    <select>
+                        <option>1x</option>
+                        <option>2x</option>
+                        <option>3x</option>
+                        <option>4x</option>
+                        <option>5x</option>
+                        <option>6x</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="primary-btn">Pagar agora</button>
+        </form>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/css/checkout.css" asp-append-version="true" />

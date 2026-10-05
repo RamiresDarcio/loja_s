@@ -1,0 +1,15 @@
+@model loja_s.ViewModels.RedefinirSenhaViewModel
+@{
+    ViewData["Title"] = "Criar nova senha";
+}
+<section class="auth-card">
+    <div class="auth-copy"><p class="account-eyebrow">Acesso seguro</p><h1>Crie uma nova senha</h1><p>O link é válido por 30 minutos e pode ser usado uma única vez.</p></div>
+    <form asp-action="RedefinirSenha" method="post" class="account-form">
+        <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+        <input asp-for="Email" type="hidden" />
+        <input asp-for="Token" type="hidden" />
+        <div class="account-field"><label asp-for="NovaSenha"></label><input asp-for="NovaSenha" autocomplete="new-password" /><span asp-validation-for="NovaSenha"></span></div>
+        <div class="account-field"><label asp-for="ConfirmarSenha"></label><input asp-for="ConfirmarSenha" autocomplete="new-password" /><span asp-validation-for="ConfirmarSenha"></span></div>
+        <button class="account-button primary" type="submit">Redefinir senha</button>
+    </form>
+</section>

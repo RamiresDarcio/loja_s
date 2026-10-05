@@ -1,11 +1,20 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using loja_s.Models;
+using loja_s.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace loja_s.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly ApplicationDbContext _context;
+
+    public HomeController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
     public IActionResult Index()
     {
         return View();
@@ -13,12 +22,12 @@ public class HomeController : Controller
 
     public IActionResult Cria()
     {
-        return View();
+        return RedirectToAction("Cadastro", "Conta");
     }
 
     public IActionResult Login()
     {
-        return View();
+        return RedirectToAction("Login", "Conta");
     }
 
     public IActionResult PaginalP()
@@ -36,6 +45,13 @@ public class HomeController : Controller
         };
 
         return View("produto", produto);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> VerProduto(int id)
+    {
+        var produto = await _context.Produtos.FirstOrDefaultAsync(p => p.Id == id && p.Status == "Ativo");
+        return produto == null ? NotFound() : View(produto);
     }
 
     public IActionResult Produto_1() => ExibirProduto(1);

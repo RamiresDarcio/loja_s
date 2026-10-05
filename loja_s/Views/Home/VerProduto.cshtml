@@ -1,0 +1,33 @@
+@model loja_s.Models.Produto
+@{
+    ViewData["Title"] = Model.Nome;
+    Layout = "_ContaLayout";
+}
+<a class="text-link" asp-controller="Home" asp-action="Index">← Voltar à loja</a>
+<article class="account-panel product-detail-layout">
+        @if (!string.IsNullOrWhiteSpace(Model.ImagemUrl))
+        {
+            <img src="@Url.Content(Model.ImagemUrl)" alt="@Model.Nome" />
+        }
+        <div>
+            <p class="account-eyebrow">Produto</p>
+            <h1>@Model.Nome</h1>
+            <p>@Model.Descricao</p>
+            <p class="account-price">R$ @Model.Preco.ToString("N2")</p>
+            <p>@(Model.Estoque > 0 ? $"Em estoque: {Model.Estoque}" : "Indisponível")</p>
+            @if (Model.Estoque > 0)
+            {
+                <form asp-controller="Carrinho" asp-action="Adicionar" method="post" class="account-actions">
+                    <input type="hidden" name="produtoId" value="@Model.Id" />
+                    <input type="hidden" name="quantidade" value="1" />
+                    <input type="hidden" name="returnUrl" value="@Url.Action("VerProduto", "Home", new { id = Model.Id })" />
+                    <button class="account-button primary" type="submit">Adicionar ao carrinho</button>
+                </form>
+            }
+            <form asp-controller="Favoritos" asp-action="Adicionar" method="post" class="account-actions">
+                <input type="hidden" name="produtoId" value="@Model.Id" />
+                <input type="hidden" name="returnUrl" value="@Url.Action("VerProduto", "Home", new { id = Model.Id })" />
+                <button class="account-button secondary" type="submit">Adicionar aos favoritos</button>
+            </form>
+        </div>
+ </article>

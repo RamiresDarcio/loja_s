@@ -1,0 +1,31 @@
+@model IEnumerable<loja_s.Models.Endereco>
+@{
+    ViewData["Title"] = "Meus endereços";
+}
+<div class="account-page-heading">
+    <div><p class="account-eyebrow">Minha conta</p><h1>Meus endereços</h1></div>
+    <a class="account-button primary" asp-action="Criar">Adicionar endereço</a>
+</div>
+<div class="address-grid">
+    @if (!Model.Any())
+    {
+        <div class="account-empty"><h2>Nenhum endereço cadastrado</h2><p>Adicione um endereço para agilizar sua próxima compra.</p><a class="account-button primary" asp-action="Criar">Adicionar endereço</a></div>
+    }
+    @foreach (var address in Model)
+    {
+        <article class="account-panel address-card">
+            <div class="panel-heading"><h2>@address.Nome</h2>@if (address.Principal) { <span class="account-badge">Principal</span> }</div>
+            <p>@address.Rua, @address.Numero @address.Complemento</p>
+            <p>@address.Bairro, @address.Cidade - @address.Estado</p>
+            <p>@address.CEP · @address.Pais</p>
+            <div class="account-actions">
+                <a class="account-button secondary" asp-action="Editar" asp-route-id="@address.Id">Editar</a>
+                @if (!address.Principal)
+                {
+                    <form asp-action="DefinirPrincipal" method="post"><input type="hidden" name="id" value="@address.Id" /><button class="account-button secondary" type="submit">Tornar principal</button></form>
+                }
+                <form asp-action="Excluir" method="post" onsubmit="return confirm('Remover este endereço?')"><input type="hidden" name="id" value="@address.Id" /><button class="account-button danger" type="submit">Excluir</button></form>
+            </div>
+        </article>
+    }
+</div>

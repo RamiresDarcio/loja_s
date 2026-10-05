@@ -1,0 +1,28 @@
+@model IEnumerable<loja_s.Models.MetodoPagamentoSalvo>
+@{
+    ViewData["Title"] = "Formas de pagamento";
+}
+<div class="account-page-heading">
+    <div><p class="account-eyebrow">Minha conta</p><h1>Formas de pagamento</h1></div>
+    <a class="account-button primary" asp-action="Adicionar">Adicionar método tokenizado</a>
+</div>
+<div class="account-panel security-note"><strong>Seus dados estão protegidos</strong><p>A loja guarda apenas a referência tokenizada recebida do provedor e os quatro últimos dígitos. Número completo e CVV não devem ser enviados nem armazenados aqui.</p></div>
+<section class="payment-method-list">
+    @if (!Model.Any())
+    {
+        <div class="account-empty"><h2>Nenhum método salvo</h2><p>Para adicionar um método real, primeiro é necessário obter um token pelo provedor de pagamentos.</p></div>
+    }
+    @foreach (var method in Model)
+    {
+        <article class="account-panel payment-method">
+            <div><strong>@method.Bandeira •••• @method.UltimosQuatro</strong>@if (method.Preferencial) { <span class="account-badge">Preferencial</span> }<small>Adicionado em @method.DataCadastro.ToLocalTime().ToString("dd/MM/yyyy")</small></div>
+            <div class="account-actions">
+                @if (!method.Preferencial)
+                {
+                    <form asp-action="DefinirPreferencial" method="post"><input type="hidden" name="id" value="@method.Id" /><button class="account-button secondary" type="submit">Definir preferencial</button></form>
+                }
+                <form asp-action="Remover" method="post"><input type="hidden" name="id" value="@method.Id" /><button class="account-button danger" type="submit">Remover</button></form>
+            </div>
+        </article>
+    }
+</section>

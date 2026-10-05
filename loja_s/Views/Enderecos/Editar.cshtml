@@ -1,0 +1,12 @@
+@model loja_s.ViewModels.EnderecoContaViewModel
+@{
+    ViewData["Title"] = "Editar endereço";
+}
+<div class="account-page-heading"><div><p class="account-eyebrow">Minha conta</p><h1>Editar endereço</h1></div><a class="account-button secondary" asp-action="Index">Voltar</a></div>
+<section class="account-panel">
+    <form asp-action="Editar" asp-route-id="@Model.Id" method="post" class="account-form">
+        <input asp-for="Id" type="hidden" />
+        <partial name="_EnderecoForm" model="Model" />
+        <button class="account-button primary" type="submit">Salvar alterações</button>
+    </form>
+</section>

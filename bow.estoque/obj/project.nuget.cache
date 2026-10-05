@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AKajmR5jUlQ=",
+  "dgSpecHash": "IHR2NiBjxds=",
   "success": true,
-  "projectFilePath": "C:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj",
+  "projectFilePath": "c:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ramir\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\ramir\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
@@ -72,9 +72,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "O pacote 'SQLitePCLRaw.lib.e_sqlite3' 2.1.11 tem uma alta vulnerabilidade de gravidade conhecida, https://github.com/advisories/GHSA-2m69-gcr7-jv3q",
-      "projectPath": "C:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj",
+      "projectPath": "c:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj",
+      "filePath": "c:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj",
       "libraryId": "SQLitePCLRaw.lib.e_sqlite3",
       "targetGraphs": [
         "net10.0"

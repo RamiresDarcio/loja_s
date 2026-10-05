@@ -1,0 +1,19 @@
+@model loja_s.Models.Pedido
+@{
+    ViewData["Title"] = "Pagamento PIX";
+    var codigo = ViewBag.CodigoPix ?? "pix-simulado";
+    var valor = ViewBag.Valor ?? 0m;
+}
+
+<div class="checkout-shell">
+    <div class="checkout-section confirmation-box">
+        <h1>Pagamento via PIX</h1>
+        <p><strong>Valor:</strong> R$ @valor.ToString("N2")</p>
+        <p><strong>Código PIX:</strong> @codigo</p>
+        <div class="pix-code-box">@codigo</div>
+        <p><strong>Status:</strong> aguardando pagamento</p>
+        <button class="primary-btn" onclick="navigator.clipboard.writeText('@codigo'); alert('Código PIX copiado!');">Copiar código PIX</button>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/css/checkout.css" asp-append-version="true" />

@@ -1,0 +1,15 @@
+@model loja_s.ViewModels.MetodoPagamentoViewModel
+@{
+    ViewData["Title"] = "Adicionar forma de pagamento";
+}
+<div class="account-page-heading"><div><p class="account-eyebrow">Minha conta</p><h1>Adicionar forma de pagamento</h1></div><a class="account-button secondary" asp-action="Index">Voltar</a></div>
+<section class="account-panel">
+    <div class="security-note"><strong>Não informe dados do cartão nesta página.</strong><p>Em produção, o gateway de pagamento deverá tokenizar o cartão no navegador e fornecer um token seguro. Esta tela aceita somente os metadados e esse token.</p></div>
+    <form asp-action="Adicionar" method="post" class="account-form account-form-grid">
+        <div asp-validation-summary="ModelOnly" class="validation-summary full-field"></div>
+        <div class="account-field"><label asp-for="Bandeira"></label><input asp-for="Bandeira" placeholder="Ex.: Mastercard" /><span asp-validation-for="Bandeira"></span></div>
+        <div class="account-field"><label asp-for="UltimosQuatro"></label><input asp-for="UltimosQuatro" inputmode="numeric" maxlength="4" /><span asp-validation-for="UltimosQuatro"></span></div>
+        <div class="account-field full-field"><label asp-for="TokenProvedor"></label><input asp-for="TokenProvedor" autocomplete="off" /><span asp-validation-for="TokenProvedor"></span></div>
+        <div class="full-field"><button class="account-button primary" type="submit">Salvar método tokenizado</button></div>
+    </form>
+</section>

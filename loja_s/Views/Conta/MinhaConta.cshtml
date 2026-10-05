@@ -1,0 +1,34 @@
+@model loja_s.Models.Usuario
+@{
+    ViewData["Title"] = "Minha conta";
+    var displayName = $"{Model.Nome} {Model.PerfilConta?.Sobrenome}".Trim();
+}
+
+<section class="account-welcome">
+    <div>
+        <p class="account-eyebrow">Área do cliente</p>
+        <h1>Olá, @displayName</h1>
+        <p>Gerencie seus pedidos, dados pessoais e preferências.</p>
+    </div>
+    <div class="account-summary">
+        <span><strong>@ViewBag.Pedidos</strong> pedidos</span>
+        <span><strong>@ViewBag.Enderecos</strong> endereços</span>
+        <span><strong>@ViewBag.Favoritos</strong> favoritos</span>
+    </div>
+</section>
+
+<section class="account-card-grid" aria-label="Opções da conta">
+    <a class="account-tile" asp-controller="Pedido" asp-action="MeusPedidos"><span class="tile-icon">▤</span><strong>Meus pedidos</strong><small>Acompanhe compras e entregas</small></a>
+    <a class="account-tile" asp-controller="Conta" asp-action="Dados"><span class="tile-icon">♙</span><strong>Meus dados</strong><small>Nome, e-mail e telefone</small></a>
+    <a class="account-tile" asp-controller="Enderecos" asp-action="Index"><span class="tile-icon">⌖</span><strong>Meus endereços</strong><small>Entrega e endereço principal</small></a>
+    <a class="account-tile" asp-controller="MetodosPagamento" asp-action="Index"><span class="tile-icon">▣</span><strong>Formas de pagamento</strong><small>Gerencie cartões tokenizados</small></a>
+    <a class="account-tile" asp-controller="Favoritos" asp-action="Index"><span class="tile-icon">♡</span><strong>Meus favoritos</strong><small>Produtos que você salvou</small></a>
+    <a class="account-tile" asp-controller="Carrinho" asp-action="Index"><span class="tile-icon">🛒</span><strong>Carrinho</strong><small>@ViewBag.Carrinho item(ns) no carrinho</small></a>
+    <a class="account-tile" asp-controller="Conta" asp-action="Seguranca"><span class="tile-icon">⌑</span><strong>Login e segurança</strong><small>Senha, e-mail e sessões</small></a>
+    <a class="account-tile" asp-controller="Conta" asp-action="Notificacoes"><span class="tile-icon">♧</span><strong>Notificações</strong><small>Escolha o que deseja receber</small></a>
+    <a class="account-tile" asp-controller="Suporte" asp-action="Index"><span class="tile-icon">?</span><strong>Central de atendimento</strong><small>Ajuda com pedidos e conta</small></a>
+</section>
+
+<form asp-action="Sair" method="post" class="signout-form">
+    <button class="account-button secondary" type="submit">Sair da conta</button>
+</form>

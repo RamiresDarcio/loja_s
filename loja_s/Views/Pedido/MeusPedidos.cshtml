@@ -1,0 +1,41 @@
+@model List<loja_s.Models.Pedido>
+@{
+    ViewData["Title"] = "Meus pedidos";
+}
+
+<div class="account-page-heading">
+    <div><p class="account-eyebrow">Minha conta</p><h1>Meus pedidos</h1></div>
+    <a class="account-button secondary" asp-controller="Conta" asp-action="MinhaConta">Voltar à conta</a>
+</div>
+<section class="account-panel">
+        @if (!Model.Any())
+        {
+            <div class="account-empty">
+                <h2>Você ainda não realizou compras</h2>
+                <p>Seus pedidos aparecerão aqui depois que você finalizar uma compra.</p>
+                <a class="account-button primary" asp-controller="Home" asp-action="Index">Explorar a loja</a>
+            </div>
+        }
+        else
+        {
+            <div class="responsive-table-wrap">
+                <table class="account-table">
+                    <thead><tr><th>Número</th><th>Data</th><th>Produtos</th><th>Pagamento</th><th>Total</th><th>Status</th><th></th></tr></thead>
+                    <tbody>
+                @foreach (var pedido in Model)
+                {
+                    <tr>
+                        <td>#@pedido.NumeroPedido</td>
+                        <td>@pedido.DataPedido.ToLocalTime().ToString("dd/MM/yyyy")</td>
+                        <td>@string.Join(", ", pedido.Itens.Select(i => $"{i.NomeProduto} ×{i.Quantidade}"))</td>
+                        <td>@pedido.FormaPagamento</td>
+                        <td>R$ @pedido.ValorTotal.ToString("N2")</td>
+                        <td>@pedido.Status</td>
+                        <td><a class="account-button secondary" asp-action="Detalhes" asp-route-id="@pedido.Id">Ver detalhes</a></td>
+                    </tr>
+                }
+                    </tbody>
+                </table>
+            </div>
+        }
+</section>
