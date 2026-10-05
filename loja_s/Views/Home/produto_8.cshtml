@@ -2,7 +2,7 @@
 
 @{
     Layout = null;
-    ViewData["Title"] = "Detalhes do Produto";
+    ViewData["Title"] = Model.Nome;
 }
 
 <!DOCTYPE html>
@@ -30,31 +30,18 @@
         <div class="galeria">
 
             <div class="imagem-principal">
-                <img id="imagemPrincipal"
-                     src="~/imagens/produtos/whey.jpg"
-                     alt="@Model.Nome" />
-            </div>
-
-            <div class="miniaturas">
-
-                <button type="button"
-                        onclick="trocarImagem('/imagens/produtos/whey.jpg')">
-                    <img src="~/imagens/produtos/whey.jpg"
-                         alt="Imagem principal" />
-                </button>
-
-                <button type="button"
-                        onclick="trocarImagem('/imagens/produtos/whey-2.jpg')">
-                    <img src="~/imagens/produtos/whey-2.jpg"
-                         alt="Imagem lateral" />
-                </button>
-
-                <button type="button"
-                        onclick="trocarImagem('/imagens/produtos/whey-3.jpg')">
-                    <img src="~/imagens/produtos/whey-3.jpg"
-                         alt="Imagem do produto" />
-                </button>
-
+                @if (!string.IsNullOrWhiteSpace(Model.ImagemUrl))
+                {
+                    <img id="imagemPrincipal"
+                         src="@Url.Content(Model.ImagemUrl)"
+                         alt="@Model.Nome" />
+                }
+                else
+                {
+                    <div class="imagem-indisponivel" role="img" aria-label="Imagem deste produto ainda não disponível">
+                        <span>Imagem do produto em breve</span>
+                    </div>
+                }
             </div>
 
         </div>
