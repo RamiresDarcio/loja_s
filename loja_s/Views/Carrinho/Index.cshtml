@@ -10,6 +10,16 @@
     <div class="checkout-content">
         <div class="checkout-section">
             <h1>Carrinho</h1>
+            @if (TempData["CheckoutCatalogoAtualizado"] is string checkoutMessage)
+            {
+                <div class="checkout-notice" role="status">@checkoutMessage</div>
+            }
+            @if (ViewBag.CatalogoAtualizado is true)
+            {
+                <div class="checkout-notice" role="status">
+                    Atualizamos preços e disponibilidade conforme o catálogo atual. Confira os valores antes de continuar.
+                </div>
+            }
             @if (Model == null || !Model.Any())
             {
                 <div class="empty-state">

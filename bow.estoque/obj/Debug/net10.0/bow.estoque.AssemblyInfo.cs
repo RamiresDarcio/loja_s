@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("bow.estoque")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c95e1c04dd02f151921ee30a22c12615cbbf0bee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+629d36e9ceaec1037a0d35cb5f6e765d29d86764")]
 [assembly: System.Reflection.AssemblyProductAttribute("bow.estoque")]
 [assembly: System.Reflection.AssemblyTitleAttribute("bow.estoque")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

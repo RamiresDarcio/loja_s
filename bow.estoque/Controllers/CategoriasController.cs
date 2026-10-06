@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace bow.estoque.Controllers;
 
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class CategoriasController : Controller
 {
     private readonly ApplicationDbContext _context;

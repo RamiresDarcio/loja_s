@@ -12,7 +12,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     if (connectionString.Contains("Data Source=", StringComparison.OrdinalIgnoreCase))
     {
-        options.UseSqlite(connectionString);
+        options.UseSqlite(Felibow.Integration.SqliteConnectionStringResolver.Resolve(
+            connectionString, builder.Environment.ContentRootPath));
     }
     else
     {
@@ -38,8 +39,14 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    db.Database.EnsureCreated();
-    SeedAdminUser(db);
+    await EnsureAdminSchemaAsync(db);
+    await EnsureProductsTableAsync(db);
+    await Felibow.Integration.IntegratedDatabaseImporter.ImportAvailableSourcesAsync(
+        db,
+        Path.GetFullPath(Path.Combine(builder.Environment.ContentRootPath, "..", "loja_s", "loja_s.db")),
+        Path.Combine(builder.Environment.ContentRootPath, "bow_estoque.db"),
+        app.Logger);
+    SeedAdminUser(db, app.Configuration, app.Environment, app.Logger);
 }
 
 if (!app.Environment.IsDevelopment())
@@ -56,24 +63,67 @@ app.UseAuthorization();
 app.UseSession();
 
 app.MapControllerRoute(
+    name: "admin",
+    pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();
 
-static void SeedAdminUser(ApplicationDbContext context)
+static async Task EnsureAdminSchemaAsync(ApplicationDbContext context)
 {
-    if (context.Usuarios.Any())
+    var createScript = context.Database.GenerateCreateScript()
+        .Replace("CREATE UNIQUE INDEX ", "CREATE UNIQUE INDEX IF NOT EXISTS ", StringComparison.OrdinalIgnoreCase)
+        .Replace("CREATE INDEX ", "CREATE INDEX IF NOT EXISTS ", StringComparison.OrdinalIgnoreCase)
+        .Replace("CREATE TABLE ", "CREATE TABLE IF NOT EXISTS ", StringComparison.OrdinalIgnoreCase);
+    await context.Database.ExecuteSqlRawAsync(createScript);
+}
+
+static async Task EnsureProductsTableAsync(ApplicationDbContext context)
+{
+    if (!context.Database.IsSqlite())
     {
+        return;
+    }
+
+    var productsTableExists = await context.Database.SqlQueryRaw<int>(
+        """SELECT COUNT(*) AS "Value" FROM sqlite_master WHERE type = 'table' AND name = 'Produtos'""")
+        .SingleAsync();
+    if (productsTableExists == 0)
+    {
+        throw new InvalidOperationException(
+            $"The SQLite database '{context.Database.GetDbConnection().DataSource}' is missing the required Produtos table after schema initialization.");
+    }
+}
+
+static void SeedAdminUser(
+    ApplicationDbContext context,
+    IConfiguration configuration,
+    IWebHostEnvironment environment,
+    ILogger logger)
+{
+    if (!environment.IsDevelopment() || context.Usuarios.Any())
+    {
+        return;
+    }
+
+    var username = configuration["DevelopmentAdmin:Username"];
+    var password = configuration["DevelopmentAdmin:Password"];
+    if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+    {
+        logger.LogWarning(
+            "No development administrator was created. Configure DevelopmentAdmin:Username and DevelopmentAdmin:Password using user secrets or environment variables.");
         return;
     }
 
     var usuario = new Usuario
     {
-        NomeUsuario = "adm2020",
+        NomeUsuario = username,
         NomeCompleto = "Administrador do Sistema",
-        Email = "adm@bowestoque.com",
-        SenhaHash = PasswordHashing.Hash("adm12345"),
+        Email = $"{username}@bowestoque.local",
+        SenhaHash = PasswordHashing.Hash(password),
         Status = "Ativo",
         DataCadastro = DateTime.Now
     };

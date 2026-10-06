@@ -30,7 +30,9 @@
                 </nav>
                 <div class="user-area">
                     <span>Olá, @User.Identity.Name</span>
-                    <a asp-controller="Account" asp-action="Logout" class="btn btn-light">Sair</a>
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        <button type="submit" class="btn btn-light">Sair</button>
+                    </form>
                 </div>
             }
         </div>

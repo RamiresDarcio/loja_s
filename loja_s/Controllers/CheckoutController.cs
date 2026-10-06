@@ -26,7 +26,9 @@ public class CheckoutController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var itens = await _carrinhoService.ObterItensAsync(UsuarioIdAtual());
+        var usuarioId = UsuarioIdAtual();
+        ViewBag.CatalogoAtualizado = await _carrinhoService.SincronizarComCatalogoAsync(usuarioId);
+        var itens = await _carrinhoService.ObterItensAsync(usuarioId);
         if (!itens.Any())
         {
             return RedirectToAction("Index", "Carrinho");
@@ -34,7 +36,6 @@ public class CheckoutController : Controller
 
         var subtotal = itens.Sum(i => i.Quantidade * i.PrecoUnitario);
         var frete = subtotal > 0 ? 19.90m : 0m;
-        var usuarioId = UsuarioIdAtual();
         var usuario = await _context.Usuarios.Include(u => u.PerfilConta)
             .FirstOrDefaultAsync(u => u.Id == usuarioId);
         if (usuario == null)
@@ -77,6 +78,13 @@ public class CheckoutController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Index(CheckoutViewModel model)
     {
+        if (await _carrinhoService.SincronizarComCatalogoAsync(UsuarioIdAtual()))
+        {
+            TempData["CheckoutCatalogoAtualizado"] =
+                "O preço ou a disponibilidade de um item mudou. Revise o resumo atualizado antes de concluir a compra.";
+            return RedirectToAction(nameof(Index));
+        }
+
         if (!ModelState.IsValid)
         {
             return View(model);

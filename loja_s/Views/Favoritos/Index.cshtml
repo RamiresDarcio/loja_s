@@ -21,7 +21,7 @@
             }
             <div class="product-card-copy">
                 <h2>@favorite.Produto.Nome</h2>
-                <p class="account-price">R$ @favorite.Produto.Preco.ToString("N2")</p>
+                <p class="account-price">R$ @favorite.Produto.PrecoEfetivo.ToString("N2")</p>
                 <span class="availability @(available ? "available" : "unavailable")">@(available ? "Disponível" : "Indisponível")</span>
                 <div class="account-actions">
                     <a class="account-button secondary" asp-controller="Home" asp-action="VerProduto" asp-route-id="@favorite.ProdutoId">Ver produto</a>

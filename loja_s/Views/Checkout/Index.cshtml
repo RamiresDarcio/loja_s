@@ -7,6 +7,16 @@
     <div class="checkout-content">
         <div class="checkout-section">
             <h1>Checkout</h1>
+            @if (TempData["CheckoutCatalogoAtualizado"] is string catalogMessage)
+            {
+                <div class="checkout-notice" role="status">@catalogMessage</div>
+            }
+            @if (ViewBag.CatalogoAtualizado is true)
+            {
+                <div class="checkout-notice" role="status">
+                    Atualizamos preços e disponibilidade conforme o catálogo atual. Confira os valores antes de continuar.
+                </div>
+            }
             <form asp-action="Index" method="post" class="checkout-form">
                 @Html.AntiForgeryToken()
 

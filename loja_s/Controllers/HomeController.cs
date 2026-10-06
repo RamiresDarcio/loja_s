@@ -15,9 +15,33 @@ public class HomeController : Controller
         _context = context;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index(string? q, string? ordenar)
     {
-        return View();
+        var produtosQuery = _context.Produtos.AsNoTracking()
+            .Where(p => p.Status == "Ativo");
+        if (!string.IsNullOrWhiteSpace(q))
+        {
+            var termo = q.Trim();
+            produtosQuery = produtosQuery.Where(p =>
+                p.Nome.Contains(termo) || p.Descricao.Contains(termo) || p.SKU.Contains(termo));
+        }
+
+        produtosQuery = ordenar switch
+        {
+            "menor-preco" => produtosQuery.OrderBy(p =>
+                p.PrecoPromocional.HasValue && p.PrecoPromocional.Value > 0 && p.PrecoPromocional.Value < p.Preco
+                    ? p.PrecoPromocional.Value
+                    : p.Preco),
+            "maior-preco" => produtosQuery.OrderByDescending(p =>
+                p.PrecoPromocional.HasValue && p.PrecoPromocional.Value > 0 && p.PrecoPromocional.Value < p.Preco
+                    ? p.PrecoPromocional.Value
+                    : p.Preco),
+            _ => produtosQuery.OrderBy(p => p.Nome)
+        };
+
+        ViewBag.Busca = q;
+        ViewBag.Ordenacao = ordenar;
+        return View(await produtosQuery.ToListAsync());
     }
 
     public IActionResult Cria()
@@ -35,96 +59,56 @@ public class HomeController : Controller
         return View("paginal_p");
     }
 
-    public IActionResult Produto()
-    {
-        var produto = new Produto
-        {
-            Nome = "Whey Protein",
-            Preco = 0,
-            Descricao = "Suplemento utilizado para complementar a alimentação com proteínas."
-        };
-
-        return View("produto", produto);
-    }
-
     [HttpGet]
     public async Task<IActionResult> VerProduto(int id)
     {
-        var produto = await _context.Produtos.FirstOrDefaultAsync(p => p.Id == id && p.Status == "Ativo");
-        return produto == null ? NotFound() : View(produto);
+        var produto = await _context.Produtos.AsNoTracking()
+            .FirstOrDefaultAsync(p => p.Id == id && p.Status == "Ativo");
+        if (produto == null)
+        {
+            return NotFound();
+        }
+
+        ViewBag.Relacionados = await _context.Produtos.AsNoTracking()
+            .Where(p => p.Id != id && p.Status == "Ativo")
+            .OrderBy(p => p.Nome)
+            .Take(4)
+            .ToListAsync();
+        return View(produto);
     }
 
-    public IActionResult Produto_1() => ExibirProduto(1);
+    public Task<IActionResult> Produto_1() => ExibirProduto(1);
 
-    public IActionResult Produto_2() => ExibirProduto(2);
+    public Task<IActionResult> Produto_2() => ExibirProduto(2);
 
-    public IActionResult Produto_3() => ExibirProduto(3);
+    public Task<IActionResult> Produto_3() => ExibirProduto(3);
 
-    public IActionResult Produto_4() => ExibirProduto(4);
+    public Task<IActionResult> Produto_4() => ExibirProduto(4);
 
-    public IActionResult Produto_5() => ExibirProduto(5);
+    public Task<IActionResult> Produto_5() => ExibirProduto(5);
 
-    public IActionResult Produto_6() => ExibirProduto(6);
+    public Task<IActionResult> Produto_6() => ExibirProduto(6);
 
-    public IActionResult Produto_7() => ExibirProduto(7);
+    public Task<IActionResult> Produto_7() => ExibirProduto(7);
 
-    public IActionResult Produto_8() => ExibirProduto(8);
+    public Task<IActionResult> Produto_8() => ExibirProduto(8);
 
-    private IActionResult ExibirProduto(int numero)
+    private async Task<IActionResult> ExibirProduto(int numero)
     {
-        var produto = numero switch
+        if (numero is < 1 or > 8)
         {
-            1 => new Produto
-            {
-                Nome = "Power Dragon Creatine — Bowsette Edition",
-                Descricao = "Creatina monohidratada apresentada em uma edição temática inspirada em Bowsette.",
-                ImagemUrl = "~/img/produtos/produtos_1.png"
-            },
-            2 => new Produto
-            {
-                Nome = "Dark Warrior Whey — Baiken Edition",
-                Descricao = "Whey protein em uma edição temática inspirada em guerreiros e desempenho.",
-                ImagemUrl = "~/img/produtos/produtos_8.png"
-            },
-            3 => new Produto
-            {
-                Nome = "Chaos Energy Multi — Juri Edition",
-                Descricao = "Multivitamínico com identidade visual energética inspirada em Juri.",
-                ImagemUrl = "~/img/produtos/produtos_3.png"
-            },
-            4 => new Produto
-            {
-                Nome = "Blue Sea Omega 3 — Nami Edition",
-                Descricao = "Ômega 3 em uma edição temática marítima inspirada em Nami.",
-                ImagemUrl = "~/img/banner/nani edition.png"
-            },
-            5 => new Produto
-            {
-                Nome = "Mystic Balance Magnesium — Mystique Edition",
-                Descricao = "Magnésio em uma edição temática misteriosa e sofisticada inspirada em Mystique.",
-                ImagemUrl = "~/img/produtos/produtos_7.png"
-            },
-            6 => new Produto
-            {
-                Nome = "Street Power D3 + K2 — CJ Edition",
-                Descricao = "Vitaminas D3 e K2 em uma edição temática urbana inspirada em CJ.",
-                ImagemUrl = "~/img/produtos/produtos_2.png"
-            },
-            7 => new Produto
-            {
-                Nome = "Mystery Recovery Glutamine — Scooby-Doo Edition",
-                Descricao = "Glutamina em uma edição divertida com identidade visual inspirada em Scooby-Doo.",
-                ImagemUrl = "~/img/produtos/produtos_5.png"
-            },
-            8 => new Produto
-            {
-                Nome = "Produto 8 — Scooby-Doo Edition",
-                Descricao = "Produto temático da coleção Scooby-Doo. A imagem e os detalhes deste produto serão adicionados quando estiverem disponíveis."
-            },
-            _ => throw new ArgumentOutOfRangeException(nameof(numero), numero, "Produto inexistente.")
-        };
+            return NotFound();
+        }
 
-        return View($"produto_{numero}", produto);
+        var produto = await _context.Produtos.AsNoTracking()
+            .Where(p => p.Status == "Ativo")
+            .OrderBy(p => p.Id)
+            .Skip(numero - 1)
+            .Select(p => p.Id)
+            .FirstOrDefaultAsync();
+        return produto == 0
+            ? NotFound()
+            : RedirectToAction(nameof(VerProduto), new { id = produto });
     }
 
     public IActionResult Privacy()

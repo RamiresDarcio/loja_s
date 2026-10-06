@@ -4,10 +4,11 @@ using bow.estoque.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace bow.estoque.Controllers;
 
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class VendasController : Controller
 {
     private readonly ApplicationDbContext _context;
@@ -68,7 +69,76 @@ public class VendasController : Controller
     }
 
     public async Task<IActionResult> Details(int id){ var venda = await _context.Vendas.Include(v => v.Cliente).Include(v => v.Usuario).Include(v => v.Itens).ThenInclude(i => i.Produto).FirstOrDefaultAsync(v => v.Id == id); if (venda == null) return NotFound(); return View(venda); }
-    [HttpPost][ValidateAntiForgeryToken] public async Task<IActionResult> Cancelar(int id){ var venda = await _context.Vendas.FindAsync(id); if (venda == null) return NotFound(); venda.Status = "Cancelada"; await _context.SaveChangesAsync(); TempData["SuccessMessage"] = "Venda cancelada."; return RedirectToAction(nameof(Index)); }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Cancelar(int id)
+    {
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        var venda = await _context.Vendas
+            .Include(v => v.Itens)
+            .FirstOrDefaultAsync(v => v.Id == id);
+        if (venda == null) return NotFound();
+
+        if (venda.Status == "Cancelada")
+        {
+            TempData["SuccessMessage"] = "Esta venda já estava cancelada.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        var usuarioId = ObterUsuarioLogadoId();
+        var updated = await _context.Vendas
+            .Where(v => v.Id == id && v.Status == venda.Status)
+            .ExecuteUpdateAsync(setters => setters.SetProperty(v => v.Status, "Cancelada"));
+        if (updated == 0)
+        {
+            await transaction.RollbackAsync();
+            TempData["ErrorMessage"] = "A venda foi alterada por outra operação. Atualize a página e tente novamente.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        if (venda.Status == "Finalizada")
+        {
+            foreach (var item in venda.Itens.GroupBy(i => i.ProdutoId).Select(g => new
+                     {
+                         ProdutoId = g.Key,
+                         Quantidade = g.Sum(i => i.Quantidade)
+                     }))
+            {
+                var produto = await _context.Produtos.FirstOrDefaultAsync(p => p.Id == item.ProdutoId);
+                if (produto == null)
+                {
+                    throw new InvalidOperationException(
+                        $"O produto {item.ProdutoId} da venda {venda.Id} não existe; o cancelamento foi revertido.");
+                }
+
+                var estoqueAnterior = produto.QuantidadeEstoque;
+                produto.QuantidadeEstoque += item.Quantidade;
+                produto.DataAtualizacao = DateTime.Now;
+                _context.MovimentacoesEstoque.Add(new MovimentacaoEstoque
+                {
+                    ProdutoId = produto.Id,
+                    TipoMovimentacao = "Entrada",
+                    Quantidade = item.Quantidade,
+                    EstoqueAnterior = estoqueAnterior,
+                    EstoqueAtual = produto.QuantidadeEstoque,
+                    Motivo = $"Cancelamento da venda #{venda.Id}",
+                    UsuarioId = usuarioId,
+                    Data = DateTime.Now
+                });
+            }
+        }
+
+        await _context.SaveChangesAsync();
+        await transaction.CommitAsync();
+        TempData["SuccessMessage"] = venda.Status == "Finalizada"
+            ? "Venda cancelada e estoque devolvido."
+            : "Venda cancelada.";
+        return RedirectToAction(nameof(Index));
+    }
+
     private async Task CarregarDadosCreate(){ ViewBag.Clientes = await _context.Clientes.OrderBy(c => c.Nome).ToListAsync(); ViewBag.Produtos = await _context.Produtos.Where(p => p.Status == "Ativo").OrderBy(p => p.Nome).ToListAsync(); }
-    private int ObterUsuarioLogadoId(){ var claim = User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier); return claim != null ? int.Parse(claim.Value) : 1; }
+    private int ObterUsuarioLogadoId() =>
+        int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var usuarioId)
+            ? usuarioId
+            : throw new InvalidOperationException("A sessão administrativa não contém um identificador válido.");
 }

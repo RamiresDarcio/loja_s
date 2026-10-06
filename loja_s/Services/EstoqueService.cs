@@ -1,5 +1,6 @@
 using loja_s.Data;
 using loja_s.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace loja_s.Services;
 
@@ -14,14 +15,27 @@ public class EstoqueService
 
     public async Task<bool> DebitarEstoqueAsync(int produtoId, int quantidade, int usuarioId, string motivo)
     {
-        var produto = await _context.Produtos.FindAsync(produtoId);
+        if (quantidade <= 0)
+        {
+            return false;
+        }
+
+        var produto = await _context.Produtos.AsNoTracking()
+            .FirstOrDefaultAsync(p => p.Id == produtoId && p.Status == "Ativo");
         if (produto == null || produto.Estoque < quantidade)
         {
             return false;
         }
 
         var estoqueAnterior = produto.Estoque;
-        produto.Estoque -= quantidade;
+        var estoqueAtual = estoqueAnterior - quantidade;
+        var linhasAtualizadas = await _context.Produtos
+            .Where(p => p.Id == produtoId && p.Status == "Ativo" && p.Estoque >= quantidade)
+            .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.Estoque, p => p.Estoque - quantidade));
+        if (linhasAtualizadas == 0)
+        {
+            return false;
+        }
 
         _context.MovimentacoesEstoque.Add(new MovimentacaoEstoque
         {
@@ -29,7 +43,7 @@ public class EstoqueService
             TipoMovimentacao = "Saida",
             Quantidade = quantidade,
             EstoqueAnterior = estoqueAnterior,
-            EstoqueAtual = produto.Estoque,
+            EstoqueAtual = estoqueAtual,
             Motivo = motivo,
             UsuarioId = usuarioId,
             Data = DateTime.UtcNow

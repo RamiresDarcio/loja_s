@@ -26,11 +26,17 @@ public class ApplicationDbContext : DbContext
     public DbSet<SessaoConta> SessoesConta { get; set; }
     public DbSet<TokenConta> TokensConta { get; set; }
     public DbSet<SolicitacaoSuporte> SolicitacoesSuporte { get; set; }
+    public DbSet<Notificacao> Notificacoes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Usuario>().HasIndex(u => u.Email).IsUnique();
         modelBuilder.Entity<Produto>().HasIndex(p => p.SKU).IsUnique();
+        modelBuilder.Entity<Produto>().Property(p => p.Preco).HasColumnName("PrecoVenda").HasColumnType("decimal(18,2)");
+        modelBuilder.Entity<Produto>().Property(p => p.Estoque).HasColumnName("QuantidadeEstoque");
+        modelBuilder.Entity<Produto>().Property(p => p.ImagemUrl).HasColumnName("Imagem");
+        modelBuilder.Entity<Produto>().Property(p => p.PrecoCusto).HasColumnType("decimal(18,2)");
+        modelBuilder.Entity<Produto>().Property(p => p.PrecoPromocional).HasColumnType("decimal(18,2)");
         modelBuilder.Entity<Endereco>().HasIndex(e => e.CEP);
         modelBuilder.Entity<PerfilConta>().HasKey(p => p.UsuarioId);
         modelBuilder.Entity<SegurancaConta>().HasKey(s => s.UsuarioId);
@@ -38,6 +44,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<SessaoConta>().HasIndex(s => s.ChaveSessao).IsUnique();
         modelBuilder.Entity<TokenConta>().HasIndex(t => new { t.TokenHash, t.Finalidade }).IsUnique();
         modelBuilder.Entity<MetodoPagamentoSalvo>().HasIndex(m => m.UsuarioId);
+        modelBuilder.Entity<Notificacao>().HasIndex(n => new { n.UsuarioId, n.CriadaEm });
 
         modelBuilder.Entity<PerfilConta>()
             .HasOne(p => p.Usuario)
@@ -63,6 +70,8 @@ public class ApplicationDbContext : DbContext
             .HasOne(t => t.Usuario).WithMany().HasForeignKey(t => t.UsuarioId).OnDelete(DeleteBehavior.Cascade);
         modelBuilder.Entity<SolicitacaoSuporte>()
             .HasOne(s => s.Usuario).WithMany().HasForeignKey(s => s.UsuarioId).OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Notificacao>()
+            .HasOne(n => n.Usuario).WithMany().HasForeignKey(n => n.UsuarioId).OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Carrinho>()
             .HasMany(c => c.Itens)

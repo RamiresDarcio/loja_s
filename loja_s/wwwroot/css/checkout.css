@@ -29,6 +29,16 @@ body {
     align-items: start;
 }
 
+.checkout-notice {
+    margin: 16px 0;
+    padding: 14px 16px;
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    background: #eff6ff;
+    color: #1e40af;
+    line-height: 1.5;
+}
+
 .checkout-section,
 .checkout-summary {
     background: var(--card);

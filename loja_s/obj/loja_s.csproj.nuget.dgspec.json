@@ -55,6 +55,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[10.0.0, )"
+            },
+            "SQLitePCLRaw.lib.e_sqlite3": {
+              "target": "Package",
+              "version": "[2.1.12-pre20260709125052, )"
             }
           },
           "imports": [

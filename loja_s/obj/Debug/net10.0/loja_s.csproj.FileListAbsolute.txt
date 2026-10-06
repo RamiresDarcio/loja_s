@@ -187,7 +187,6 @@ C:\Users\ramir\AppData\Local\Temp\loja_s-product-images-validation\loja_s.runtim
 C:\Users\ramir\AppData\Local\Temp\loja_s-product-images-validation\loja_s.dll
 C:\Users\ramir\AppData\Local\Temp\loja_s-product-images-validation\loja_s.pdb
 C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\ihj7qy5dli-{0}-6wfrz2lufe-6wfrz2lufe.gz
-C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\fsubi9y24n-{0}-96qkl35zfk-96qkl35zfk.gz
 C:\Laboratório de Programação\site_loja_s\loja_s\bin\Debug\net10.0\Humanizer.dll
 C:\Laboratório de Programação\site_loja_s\loja_s\bin\Debug\net10.0\Microsoft.Build.dll
 C:\Laboratório de Programação\site_loja_s\loja_s\bin\Debug\net10.0\Microsoft.Build.Framework.dll
@@ -309,13 +308,11 @@ C:\Laboratório de Programação\site_loja_s\loja_s\bin\Debug\net10.0\runtimes\m
 C:\Laboratório de Programação\site_loja_s\loja_s\bin\Debug\net10.0\runtimes\maccatalyst-x64\native\libe_sqlite3.dylib
 C:\Laboratório de Programação\site_loja_s\loja_s\bin\Debug\net10.0\runtimes\osx-arm64\native\libe_sqlite3.dylib
 C:\Laboratório de Programação\site_loja_s\loja_s\bin\Debug\net10.0\runtimes\osx-x64\native\libe_sqlite3.dylib
-C:\Laboratório de Programação\site_loja_s\loja_s\bin\Debug\net10.0\runtimes\win-arm\native\e_sqlite3.dll
 C:\Laboratório de Programação\site_loja_s\loja_s\bin\Debug\net10.0\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Laboratório de Programação\site_loja_s\loja_s\bin\Debug\net10.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Laboratório de Programação\site_loja_s\loja_s\bin\Debug\net10.0\runtimes\win-x86\native\e_sqlite3.dll
 C:\Laboratório de Programação\site_loja_s\loja_s\bin\Debug\net10.0\runtimes\win\lib\net9.0\System.Windows.Extensions.dll
 C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\loja_s.csproj.AssemblyReference.cache
-C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\ab9cax4ufw-{0}-z5sv8f9iyh-z5sv8f9iyh.gz
 C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\loja_s.csproj.Up2Date
 C:\Users\ramir\AppData\Local\Temp\loja-s-account-build\appsettings.Development.json
 C:\Users\ramir\AppData\Local\Temp\loja-s-account-build\appsettings.json
@@ -325,7 +322,6 @@ C:\Users\ramir\AppData\Local\Temp\loja-s-account-build\loja_s.deps.json
 C:\Users\ramir\AppData\Local\Temp\loja-s-account-build\loja_s.runtimeconfig.json
 C:\Users\ramir\AppData\Local\Temp\loja-s-account-build\loja_s.dll
 C:\Users\ramir\AppData\Local\Temp\loja-s-account-build\loja_s.pdb
-C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\tu0pbepwql-{0}-l2lf6ucju1-l2lf6ucju1.gz
 C:\Users\ramir\AppData\Local\Temp\loja-s-account-build-final\appsettings.Development.json
 C:\Users\ramir\AppData\Local\Temp\loja-s-account-build-final\appsettings.json
 C:\Users\ramir\AppData\Local\Temp\loja-s-account-build-final\loja_s.staticwebassets.runtime.json
@@ -350,3 +346,15 @@ C:\Users\ramir\AppData\Local\Temp\loja-s-account-release-check\loja_s.deps.json
 C:\Users\ramir\AppData\Local\Temp\loja-s-account-release-check\loja_s.runtimeconfig.json
 C:\Users\ramir\AppData\Local\Temp\loja-s-account-release-check\loja_s.dll
 C:\Users\ramir\AppData\Local\Temp\loja-s-account-release-check\loja_s.pdb
+C:\Users\ramir\AppData\Local\Temp\loja_s-validation\appsettings.Development.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-validation\appsettings.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-validation\loja_s.staticwebassets.runtime.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-validation\loja_s.staticwebassets.endpoints.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-validation\loja_s.exe
+C:\Users\ramir\AppData\Local\Temp\loja_s-validation\loja_s.deps.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-validation\loja_s.runtimeconfig.json
+C:\Users\ramir\AppData\Local\Temp\loja_s-validation\loja_s.dll
+C:\Users\ramir\AppData\Local\Temp\loja_s-validation\loja_s.pdb
+C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\ab9cax4ufw-{0}-lsxhuqijo3-lsxhuqijo3.gz
+C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\tu0pbepwql-{0}-951fldymc1-951fldymc1.gz
+C:\Laboratório de Programação\site_loja_s\loja_s\obj\Debug\net10.0\compressed\fsubi9y24n-{0}-pt8dfoegdl-pt8dfoegdl.gz

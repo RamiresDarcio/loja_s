@@ -165,14 +165,20 @@ public class ContaController : Controller
             usuario.SenhaHash = _passwordHasher.HashPassword(usuario, model.Senha);
         }
 
+        var now = DateTime.UtcNow;
+        var inactiveSessions = await _context.SessoesConta
+            .Where(s => s.UsuarioId == usuario.Id && s.UltimaAtividade < now.AddDays(-30))
+            .ToListAsync();
+        _context.SessoesConta.RemoveRange(inactiveSessions);
+
         var sessionKey = Guid.NewGuid().ToString("N");
         var session = new SessaoConta
         {
             UsuarioId = usuario.Id,
             ChaveSessao = sessionKey,
             Dispositivo = Request.Headers.UserAgent.ToString().Trim(),
-            CriadaEm = DateTime.UtcNow,
-            UltimaAtividade = DateTime.UtcNow
+            CriadaEm = now,
+            UltimaAtividade = now
         };
         if (session.Dispositivo.Length > 250)
         {
@@ -360,7 +366,8 @@ public class ContaController : Controller
             Promocoes = usuario.PerfilConta.Promocoes,
             Novidades = usuario.PerfilConta.Novidades,
             ProdutosFavoritos = usuario.PerfilConta.ProdutosFavoritos,
-            AlertasSeguranca = usuario.PerfilConta.AlertasSeguranca
+            AlertasSeguranca = usuario.PerfilConta.AlertasSeguranca,
+            Notificacoes = await ObterNotificacoesAsync(usuario.Id)
         });
     }
 
@@ -386,6 +393,23 @@ public class ContaController : Controller
     }
 
     [Authorize]
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> MarcarNotificacaoComoLida(int id)
+    {
+        var notificacao = await _context.Notificacoes.FirstOrDefaultAsync(n =>
+            n.Id == id && n.UsuarioId == UsuarioIdAtual());
+        if (notificacao == null)
+        {
+            return NotFound();
+        }
+
+        notificacao.LidaEm ??= DateTime.UtcNow;
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Notificacoes));
+    }
+
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> Seguranca()
     {
@@ -396,7 +420,8 @@ public class ContaController : Controller
         }
 
         var sessionId = User.FindFirstValue("AccountSessionId");
-        ViewBag.Sessoes = await _context.SessoesConta.Where(s => s.UsuarioId == usuario.Id)
+        ViewBag.Sessoes = await _context.SessoesConta
+            .Where(s => s.UsuarioId == usuario.Id && s.UltimaAtividade >= DateTime.UtcNow.AddDays(-30))
             .OrderByDescending(s => s.UltimaAtividade).ToListAsync();
         ViewBag.SessaoAtual = sessionId;
         ViewBag.EmailConfirmado = usuario.PerfilConta?.EmailConfirmado ?? false;
@@ -695,6 +720,10 @@ public class ContaController : Controller
 
         return usuario;
     }
+
+    private async Task<List<Notificacao>> ObterNotificacoesAsync(int usuarioId) =>
+        await _context.Notificacoes.Where(n => n.UsuarioId == usuarioId)
+            .OrderByDescending(n => n.CriadaEm).Take(20).ToListAsync();
 
     private int UsuarioIdAtual() =>
         int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var usuarioId) ? usuarioId : 0;

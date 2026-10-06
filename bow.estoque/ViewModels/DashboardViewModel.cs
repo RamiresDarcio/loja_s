@@ -15,3 +15,20 @@ public class DashboardViewModel
     public List<string> ProdutosEstoque { get; set; } = new();
     public List<int> QuantidadeEstoqueAtual { get; set; } = new();
 }
+
+public class DashboardMonthlySales
+{
+    public string Mes { get; set; } = string.Empty;
+    public int Total { get; set; }
+}
+
+public class DashboardProductSales
+{
+    public string Nome { get; set; } = string.Empty;
+    public int Quantidade { get; set; }
+}
+
+public class DashboardStoreOrderValue
+{
+    public decimal ValorTotal { get; set; }
+}

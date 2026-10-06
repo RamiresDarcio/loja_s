@@ -31,6 +31,70 @@ public class CarrinhoService
         return ObterCarrinhoDaSessao().Itens;
     }
 
+    public async Task<bool> SincronizarComCatalogoAsync(int? usuarioId)
+    {
+        var carrinhoConta = usuarioId is > 0
+            ? await ObterCarrinhoAsync(usuarioId.Value)
+            : null;
+        var carrinhoSessao = usuarioId is > 0 ? null : ObterCarrinhoDaSessao();
+        var itens = carrinhoConta?.Itens ?? carrinhoSessao?.Itens;
+        if (itens == null || itens.Count == 0)
+        {
+            return false;
+        }
+
+        var produtoIds = itens.Select(i => i.ProdutoId).Distinct().ToList();
+        var produtos = await _context.Produtos
+            .Where(p => produtoIds.Contains(p.Id) && p.Status == "Ativo")
+            .ToDictionaryAsync(p => p.Id);
+        var alterado = false;
+
+        foreach (var item in itens.ToList())
+        {
+            if (!produtos.TryGetValue(item.ProdutoId, out var produto) || produto.Estoque <= 0)
+            {
+                if (carrinhoConta != null)
+                {
+                    _context.ItensCarrinho.Remove(item);
+                }
+                else
+                {
+                    carrinhoSessao!.Itens.Remove(item);
+                }
+
+                alterado = true;
+                continue;
+            }
+
+            if (item.Quantidade > produto.Estoque)
+            {
+                item.Quantidade = produto.Estoque;
+                alterado = true;
+            }
+
+            if (item.NomeProduto != produto.Nome || item.PrecoUnitario != produto.PrecoEfetivo)
+            {
+                item.NomeProduto = produto.Nome;
+                item.PrecoUnitario = produto.PrecoEfetivo;
+                alterado = true;
+            }
+        }
+
+        if (alterado)
+        {
+            if (carrinhoConta != null)
+            {
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                SalvarCarrinhoDaSessao(carrinhoSessao!);
+            }
+        }
+
+        return alterado;
+    }
+
     public async Task AdicionarProdutoAsync(int produtoId, int quantidade, int? usuarioId)
     {
         if (quantidade <= 0)
@@ -62,13 +126,13 @@ public class CarrinhoService
                     ProdutoId = produto.Id,
                     NomeProduto = produto.Nome,
                     Quantidade = quantidade,
-                    PrecoUnitario = produto.Preco
+                    PrecoUnitario = produto.PrecoEfetivo
                 });
             }
             else
             {
                 item.NomeProduto = produto.Nome;
-                item.PrecoUnitario = produto.Preco;
+                item.PrecoUnitario = produto.PrecoEfetivo;
                 item.Quantidade = quantidadeSolicitada;
             }
 
@@ -91,13 +155,13 @@ public class CarrinhoService
                 ProdutoId = produto.Id,
                 NomeProduto = produto.Nome,
                 Quantidade = quantidade,
-                PrecoUnitario = produto.Preco
+                PrecoUnitario = produto.PrecoEfetivo
             });
         }
         else
         {
             sessionItem.NomeProduto = produto.Nome;
-            sessionItem.PrecoUnitario = produto.Preco;
+            sessionItem.PrecoUnitario = produto.PrecoEfetivo;
             sessionItem.Quantidade = desiredQuantity;
         }
 
@@ -129,7 +193,7 @@ public class CarrinhoService
 
                 item.Quantidade = quantidade;
                 item.NomeProduto = product.Nome;
-                item.PrecoUnitario = product.Preco;
+                item.PrecoUnitario = product.PrecoEfetivo;
             }
 
             await _context.SaveChangesAsync();
@@ -157,7 +221,7 @@ public class CarrinhoService
 
             sessionItem.Quantidade = quantidade;
             sessionItem.NomeProduto = product.Nome;
-            sessionItem.PrecoUnitario = product.Preco;
+            sessionItem.PrecoUnitario = product.PrecoEfetivo;
         }
 
         SalvarCarrinhoDaSessao(sessionCart);
@@ -236,14 +300,14 @@ public class CarrinhoService
                     ProdutoId = product.Id,
                     NomeProduto = product.Nome,
                     Quantidade = actualQuantity,
-                    PrecoUnitario = product.Preco
+                    PrecoUnitario = product.PrecoEfetivo
                 });
             }
             else
             {
                 accountItem.NomeProduto = product.Nome;
                 accountItem.Quantidade = actualQuantity;
-                accountItem.PrecoUnitario = product.Preco;
+                accountItem.PrecoUnitario = product.PrecoEfetivo;
             }
         }
 

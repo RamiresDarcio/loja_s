@@ -18,6 +18,7 @@ public class AccountController : Controller
         _context = context;
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public IActionResult Login()
     {
@@ -29,6 +30,7 @@ public class AccountController : Controller
         return View(new LoginViewModel());
     }
 
+    [AllowAnonymous]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(LoginViewModel model)
@@ -39,10 +41,16 @@ public class AccountController : Controller
         }
 
         var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.NomeUsuario == model.Usuario && u.Status == "Ativo");
-        if (usuario == null || !PasswordHashing.Verify(model.Senha, usuario.SenhaHash))
+        if (usuario == null || !PasswordHashing.Verify(model.Senha, usuario.SenhaHash, out var upgradedHash))
         {
             TempData["ErrorMessage"] = "Usuário ou senha inválidos.";
             return View(model);
+        }
+
+        if (upgradedHash is not null)
+        {
+            usuario.SenhaHash = upgradedHash;
+            await _context.SaveChangesAsync();
         }
 
         var claims = new[]
@@ -61,7 +69,9 @@ public class AccountController : Controller
         return RedirectToAction("Index", "Dashboard");
     }
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
+    [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

@@ -943,7 +943,7 @@
           "lib/netstandard2.0/SQLitePCLRaw.core.dll": {}
         }
       },
-      "SQLitePCLRaw.lib.e_sqlite3/2.1.11": {
+      "SQLitePCLRaw.lib.e_sqlite3/2.1.12-pre20260709125052": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/_._": {}
@@ -1030,10 +1030,6 @@
           "runtimes/osx-x64/native/libe_sqlite3.dylib": {
             "assetType": "native",
             "rid": "osx-x64"
-          },
-          "runtimes/win-arm/native/e_sqlite3.dll": {
-            "assetType": "native",
-            "rid": "win-arm"
           },
           "runtimes/win-arm64/native/e_sqlite3.dll": {
             "assetType": "native",
@@ -3238,10 +3234,10 @@
         "sqlitepclraw.core.nuspec"
       ]
     },
-    "SQLitePCLRaw.lib.e_sqlite3/2.1.11": {
-      "sha512": "Ev2ytaXiOlWZ4b3R67GZBsemTINslLD1DCJr2xiacpn4tbapu0Q4dHEzSvZSMnVWeE5nlObU3VZN2p81q3XOYQ==",
+    "SQLitePCLRaw.lib.e_sqlite3/2.1.12-pre20260709125052": {
+      "sha512": "GIFAmF4SzcMNCUy0ECxT7/uxFtypVqnFzk9A6Xlpetvl1mmQ2x2gBUaEpaTgYBsbbbxyUDk6g2Jn8eY2PMmCJw==",
       "type": "package",
-      "path": "sqlitepclraw.lib.e_sqlite3/2.1.11",
+      "path": "sqlitepclraw.lib.e_sqlite3/2.1.12-pre20260709125052",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3274,15 +3270,10 @@
         "runtimes/maccatalyst-x64/native/libe_sqlite3.dylib",
         "runtimes/osx-arm64/native/libe_sqlite3.dylib",
         "runtimes/osx-x64/native/libe_sqlite3.dylib",
-        "runtimes/win-arm/native/e_sqlite3.dll",
         "runtimes/win-arm64/native/e_sqlite3.dll",
         "runtimes/win-x64/native/e_sqlite3.dll",
         "runtimes/win-x86/native/e_sqlite3.dll",
-        "runtimes/win10-arm/nativeassets/uap10.0/e_sqlite3.dll",
-        "runtimes/win10-arm64/nativeassets/uap10.0/e_sqlite3.dll",
-        "runtimes/win10-x64/nativeassets/uap10.0/e_sqlite3.dll",
-        "runtimes/win10-x86/nativeassets/uap10.0/e_sqlite3.dll",
-        "sqlitepclraw.lib.e_sqlite3.2.1.11.nupkg.sha512",
+        "sqlitepclraw.lib.e_sqlite3.2.1.12-pre20260709125052.nupkg.sha512",
         "sqlitepclraw.lib.e_sqlite3.nuspec"
       ]
     },
@@ -3797,7 +3788,8 @@
     "net10.0": [
       "Microsoft.EntityFrameworkCore.SqlServer >= 10.0.0",
       "Microsoft.EntityFrameworkCore.Sqlite >= 10.0.0",
-      "Microsoft.EntityFrameworkCore.Tools >= 10.0.0"
+      "Microsoft.EntityFrameworkCore.Tools >= 10.0.0",
+      "SQLitePCLRaw.lib.e_sqlite3 >= 2.1.12-pre20260709125052"
     ]
   },
   "packageFolders": {
@@ -3831,6 +3823,9 @@
       "warningProperties": {
         "warnAsError": [
           "NU1605"
+        ],
+        "warnNotAsError": [
+          "NU1903"
         ]
       },
       "restoreAuditProperties": {
@@ -3858,6 +3853,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[10.0.0, )"
+          },
+          "SQLitePCLRaw.lib.e_sqlite3": {
+            "target": "Package",
+            "version": "[2.1.12-pre20260709125052, )"
           }
         },
         "imports": [
@@ -4296,17 +4295,5 @@
         }
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "O pacote 'SQLitePCLRaw.lib.e_sqlite3' 2.1.11 tem uma alta vulnerabilidade de gravidade conhecida, https://github.com/advisories/GHSA-2m69-gcr7-jv3q",
-      "libraryId": "SQLitePCLRaw.lib.e_sqlite3",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    }
-  ]
+  }
 }

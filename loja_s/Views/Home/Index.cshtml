@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IReadOnlyList<loja_s.Models.Produto>
+@{
     Layout = null;
     ViewData["Title"] = "Loja de Suplementos - Home";
 }
@@ -28,9 +29,9 @@
             </span>
         </a>
 
-        <form class="search-bar" role="search" action="#" method="get">
+        <form class="search-bar" role="search" asp-controller="Home" asp-action="Index" method="get">
             <label class="visually-hidden" for="product-search">Buscar produtos</label>
-            <input id="product-search" name="q" type="search" placeholder="O que você está procurando?">
+            <input id="product-search" name="q" type="search" value="@ViewBag.Busca" placeholder="O que você está procurando?">
             <button class="search-btn" type="submit" aria-label="Buscar">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                     <circle cx="10.8" cy="10.8" r="6.3" />
@@ -134,70 +135,48 @@
             <p>Encontre o suplemento ideal para sua rotina.</p>
         </div>
 
-        <article class="product-card">
-            <div class="product-img"><img src="~/img/produtos/produtos_1.png" alt="Power Dragon Creatine — Bowsette Edition" /></div>
-            <div class="product-info">
-                <span class="producer"><a asp-controller="Home" asp-action="Produto_1">Power Dragon Creatine — Bowsette Edition</a></span>
-                <span class="price">R$ 0,00</span>
-                <a class="buy-btn" asp-controller="Home" asp-action="Produto_1">COMPRAR</a>
-            </div>
-        </article>
-        <article class="product-card">
-            <div class="product-img"><img src="~/img/produtos/produtos_8.png" alt="Dark Warrior Whey — Baiken Edition" /></div>
-            <div class="product-info">
-                <span class="producer"><a asp-controller="Home" asp-action="Produto_2">Dark Warrior Whey — Baiken Edition</a></span>
-                <span class="price">R$ 0,00</span>
-                <a class="buy-btn" asp-controller="Home" asp-action="Produto_2">COMPRAR</a>
-            </div>
-        </article>
-        <article class="product-card">
-            <div class="product-img"><img src="~/img/produtos/produtos_3.png" alt="Chaos Energy Multi — Juri Edition" /></div>
-            <div class="product-info">
-                <span class="producer"><a asp-controller="Home" asp-action="Produto_3">Chaos Energy Multi — Juri Edition</a></span>
-                <span class="price">R$ 0,00</span>
-                <a class="buy-btn" asp-controller="Home" asp-action="Produto_3">COMPRAR</a>
-            </div>
-        </article>
-        <article class="product-card">
-            <div class="product-img"><img src="~/img/banner/nani%20edition.png" alt="Blue Sea Omega 3 — Nami Edition" /></div>
-            <div class="product-info">
-                <span class="producer"><a asp-controller="Home" asp-action="Produto_4">Blue Sea Omega 3 — Nami Edition</a></span>
-                <span class="price">R$ 0,00</span>
-                <a class="buy-btn" asp-controller="Home" asp-action="Produto_4">COMPRAR</a>
-            </div>
-        </article>
-        <article class="product-card">
-            <div class="product-img"><img src="~/img/produtos/produtos_7.png" alt="Mystic Balance Magnesium — Mystique Edition" /></div>
-            <div class="product-info">
-                <span class="producer"><a asp-controller="Home" asp-action="Produto_5">Mystic Balance Magnesium — Mystique Edition</a></span>
-                <span class="price">R$ 0,00</span>
-                <a class="buy-btn" asp-controller="Home" asp-action="Produto_5">COMPRAR</a>
-            </div>
-        </article>
-        <article class="product-card">
-            <div class="product-img"><img src="~/img/produtos/produtos_2.png" alt="Street Power D3 + K2 — CJ Edition" /></div>
-            <div class="product-info">
-                <span class="producer"><a asp-controller="Home" asp-action="Produto_6">Street Power D3 + K2 — CJ Edition</a></span>
-                <span class="price">R$ 0,00</span>
-                <a class="buy-btn" asp-controller="Home" asp-action="Produto_6">COMPRAR</a>
-            </div>
-        </article>
-        <article class="product-card">
-            <div class="product-img"><img src="~/img/produtos/produtos_5.png" alt="Mystery Recovery Glutamine — Scooby-Doo Edition" /></div>
-            <div class="product-info">
-                <span class="producer"><a asp-controller="Home" asp-action="Produto_7">Mystery Recovery Glutamine — Scooby-Doo Edition</a></span>
-                <span class="price">R$ 0,00</span>
-                <a class="buy-btn" asp-controller="Home" asp-action="Produto_7">COMPRAR</a>
-            </div>
-        </article>
-        <article class="product-card">
-            <div class="product-img product-img-pending" aria-label="Imagem do produto ainda não disponível"><span>Imagem em breve</span></div>
-            <div class="product-info">
-                <span class="producer"><a asp-controller="Home" asp-action="Produto_8">Produto 8 — Scooby-Doo Edition</a></span>
-                <span class="price">R$ 0,00</span>
-                <a class="buy-btn" asp-controller="Home" asp-action="Produto_8">COMPRAR</a>
-            </div>
-        </article>
+        <form class="catalog-filters" asp-controller="Home" asp-action="Index" method="get">
+            <input name="q" type="search" value="@ViewBag.Busca" placeholder="Buscar por nome ou edição" aria-label="Buscar produtos" />
+            <select name="ordenar" aria-label="Ordenar produtos">
+                <option value="">Ordenar por nome</option>
+                <option value="menor-preco" selected="@(ViewBag.Ordenacao as string == "menor-preco" ? "selected" : null)">Menor preço</option>
+                <option value="maior-preco" selected="@(ViewBag.Ordenacao as string == "maior-preco" ? "selected" : null)">Maior preço</option>
+            </select>
+            <button class="buy-btn" type="submit">Buscar</button>
+        </form>
+
+        @if (Model.Count == 0)
+        {
+            <p class="catalog-empty">Não encontramos produtos para esta busca.</p>
+        }
+        else
+        {
+            @foreach (var produto in Model)
+            {
+                <article class="product-card">
+                    <a class="product-img" asp-controller="Home" asp-action="VerProduto" asp-route-id="@produto.Id">
+                        @if (!string.IsNullOrWhiteSpace(produto.ImagemUrl))
+                        {
+                            <img src="@Url.Content(produto.ImagemUrl)" alt="@produto.Nome" />
+                        }
+                        else
+                        {
+                            <span>Imagem indisponível</span>
+                        }
+                    </a>
+                    <div class="product-info">
+                        <span class="producer"><a asp-controller="Home" asp-action="VerProduto" asp-route-id="@produto.Id">@produto.Nome</a></span>
+                        @if (produto.PrecoEfetivo < produto.Preco)
+                        {
+                            <span class="price-old">R$ @produto.Preco.ToString("N2")</span>
+                        }
+                        <span class="price">R$ @produto.PrecoEfetivo.ToString("N2")</span>
+                        <span class="product-availability">@(produto.Estoque > 0 ? "Disponível" : "Indisponível")</span>
+                        <a class="buy-btn" asp-controller="Home" asp-action="VerProduto" asp-route-id="@produto.Id">VER PRODUTO</a>
+                    </div>
+                </article>
+            }
+        }
     </main>
     <footer class="footer">
         <div class="footer-shell">

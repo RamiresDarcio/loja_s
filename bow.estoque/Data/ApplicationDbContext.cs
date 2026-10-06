@@ -20,6 +20,15 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Usuario>().ToTable("AdminUsuarios");
+        modelBuilder.Entity<Categoria>().ToTable("AdminCategorias");
+        modelBuilder.Entity<Fornecedor>().ToTable("AdminFornecedores");
+        modelBuilder.Entity<Cliente>().ToTable("AdminClientes");
+        modelBuilder.Entity<Produto>().ToTable("Produtos");
+        modelBuilder.Entity<MovimentacaoEstoque>().ToTable("AdminMovimentacoesEstoque");
+        modelBuilder.Entity<Venda>().ToTable("AdminVendas");
+        modelBuilder.Entity<ItemVenda>().ToTable("AdminItensVenda");
+
         modelBuilder.Entity<Usuario>().HasIndex(u => u.NomeUsuario).IsUnique();
         modelBuilder.Entity<Produto>().HasIndex(p => p.SKU).IsUnique();
         modelBuilder.Entity<Fornecedor>().HasIndex(f => f.CNPJ).IsUnique();

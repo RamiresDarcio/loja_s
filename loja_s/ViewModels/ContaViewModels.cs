@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using loja_s.Models;
 
 namespace loja_s.ViewModels;
 
@@ -214,4 +215,6 @@ public class PreferenciasNotificacaoViewModel
 
     [Display(Name = "Alertas de segurança")]
     public bool AlertasSeguranca { get; set; }
+
+    public List<Notificacao> Notificacoes { get; set; } = [];
 }

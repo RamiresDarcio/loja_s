@@ -13,7 +13,11 @@
             <p class="account-eyebrow">Produto</p>
             <h1>@Model.Nome</h1>
             <p>@Model.Descricao</p>
-            <p class="account-price">R$ @Model.Preco.ToString("N2")</p>
+            @if (Model.PrecoEfetivo < Model.Preco)
+            {
+                <p class="product-price-old">R$ @Model.Preco.ToString("N2")</p>
+            }
+            <p class="account-price">R$ @Model.PrecoEfetivo.ToString("N2")</p>
             <p>@(Model.Estoque > 0 ? $"Em estoque: {Model.Estoque}" : "Indisponível")</p>
             @if (Model.Estoque > 0)
             {
@@ -31,3 +35,26 @@
             </form>
         </div>
  </article>
+ @{
+     var relacionados = ViewBag.Relacionados as IEnumerable<loja_s.Models.Produto>
+         ?? Enumerable.Empty<loja_s.Models.Produto>();
+ }
+ @if (relacionados.Any())
+ {
+     <section class="account-panel related-products">
+         <h2>Você também pode gostar</h2>
+         <div class="related-products-grid">
+             @foreach (var produto in relacionados)
+             {
+                 <a class="related-product-card" asp-action="VerProduto" asp-route-id="@produto.Id">
+                     @if (!string.IsNullOrWhiteSpace(produto.ImagemUrl))
+                     {
+                         <img src="@Url.Content(produto.ImagemUrl)" alt="" />
+                     }
+                     <strong>@produto.Nome</strong>
+                     <span>R$ @produto.PrecoEfetivo.ToString("N2")</span>
+                 </a>
+             }
+         </div>
+     </section>
+ }

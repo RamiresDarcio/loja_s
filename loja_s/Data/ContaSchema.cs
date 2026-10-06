@@ -79,6 +79,18 @@ public static class ContaSchema
                 "Status" TEXT NOT NULL,
                 "DataCriacao" TEXT NOT NULL
             );
+            """,
+            """
+            CREATE TABLE IF NOT EXISTS "Notificacoes" (
+                "Id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                "UsuarioId" INTEGER NOT NULL REFERENCES "Usuarios" ("Id") ON DELETE CASCADE,
+                "Categoria" TEXT NOT NULL,
+                "Titulo" TEXT NOT NULL,
+                "Mensagem" TEXT NOT NULL,
+                "Url" TEXT NULL,
+                "CriadaEm" TEXT NOT NULL,
+                "LidaEm" TEXT NULL
+            );
             """
         };
 
@@ -95,6 +107,8 @@ public static class ContaSchema
             "CREATE UNIQUE INDEX IF NOT EXISTS \"IX_TokensConta_TokenHash_Finalidade\" ON \"TokensConta\" (\"TokenHash\", \"Finalidade\");");
         await CreateIndexIfMissingAsync(db,
             "CREATE INDEX IF NOT EXISTS \"IX_MetodosPagamentoSalvos_UsuarioId\" ON \"MetodosPagamentoSalvos\" (\"UsuarioId\");");
+        await CreateIndexIfMissingAsync(db,
+            "CREATE INDEX IF NOT EXISTS \"IX_Notificacoes_UsuarioId_CriadaEm\" ON \"Notificacoes\" (\"UsuarioId\", \"CriadaEm\");");
 
         await AddColumnIfMissingAsync(db, "Enderecos", "Pais",
             "ALTER TABLE \"Enderecos\" ADD COLUMN \"Pais\" TEXT NOT NULL DEFAULT 'Brasil';");

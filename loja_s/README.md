@@ -12,6 +12,19 @@ dotnet run --project .\loja_s\loja_s.csproj
 
 Abra `/Conta/Cadastro` para criar uma conta e `/Conta/Login` para entrar. O painel pessoal fica em `/Conta/MinhaConta`. O primeiro acesso cria as tabelas da conta que faltarem e adiciona as colunas de endereço ao banco existente.
 
+## Integração com o painel de estoque
+
+A loja e `bow.estoque` usam `felibow_integrated.db`, criado na raiz do repositório. O caminho padrão é resolvido a partir da raiz do projeto mesmo quando o processo é iniciado de outra pasta. Ao iniciar, cada aplicação cria as tabelas que administra, confirma que a tabela compartilhada `Produtos` existe e importa os dados legados correspondentes de `loja_s/loja_s.db` e `bow.estoque/bow_estoque.db`. A importação é transacional e registrada no banco para não duplicar dados em inicializações futuras; os arquivos legados não são alterados. Os dados administrativos usam tabelas com prefixo `Admin`.
+
+Inicie cada aplicação em um terminal separado:
+
+```powershell
+dotnet run --project .\loja_s\loja_s.csproj
+dotnet run --project .\bow.estoque\bow.estoque.csproj
+```
+
+Para escolher outro arquivo integrado, configure `ConnectionStrings__DefaultConnection` nos dois processos com a mesma cadeia SQLite. Para criar o primeiro administrador de desenvolvimento quando ainda não houver administradores importados, configure `DevelopmentAdmin__Username` e `DevelopmentAdmin__Password`; não existe credencial padrão no código ou na tela de login. Senhas administrativas legadas em SHA-256 são migradas para o formato do ASP.NET Core Identity no próximo login bem-sucedido.
+
 ## Segurança e funcionamento
 
 - A senha usa `PasswordHasher<Usuario>` do ASP.NET Core Identity; não há senha administrativa ou de cliente predefinida.

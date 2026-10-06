@@ -23,6 +23,7 @@ public class CarrinhoController : Controller
     public async Task<IActionResult> Index()
     {
         var userId = ObterUsuarioId();
+        ViewBag.CatalogoAtualizado = await _carrinhoService.SincronizarComCatalogoAsync(userId);
         var itens = await _carrinhoService.ObterItensAsync(userId);
         var subtotal = itens.Sum(i => i.Quantidade * i.PrecoUnitario);
         var frete = subtotal > 0 ? 19.90m : 0m;
