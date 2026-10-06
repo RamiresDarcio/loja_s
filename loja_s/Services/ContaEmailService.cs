@@ -61,7 +61,8 @@ public sealed class ContaEmailService : IContaEmailService
                                 string.IsNullOrWhiteSpace(_configuration["Email:Smtp:Password"]);
             return !string.IsNullOrWhiteSpace(_configuration["Email:Smtp:Host"]) &&
                    !string.IsNullOrWhiteSpace(_configuration["Email:Smtp:From"]) &&
-                   (hasSmtpAccount || noSmtpAccount);
+                   (hasSmtpAccount || noSmtpAccount) &&
+                   HasValidPublicBaseUrl();
         }
     }
 
@@ -78,10 +79,12 @@ public sealed class ContaEmailService : IContaEmailService
             var host = _configuration["Email:Smtp:Host"];
             var from = _configuration["Email:Smtp:From"];
             var port = _configuration.GetValue<int?>("Email:Smtp:Port") ?? 587;
-            if (!IsAvailable)
+            if (string.IsNullOrWhiteSpace(host) ||
+                string.IsNullOrWhiteSpace(from) ||
+                !IsAvailable)
             {
                 throw new EmailConfigurationException(
-                    "O envio de e-mail não está configurado. Defina Email__Smtp__Host e Email__Smtp__From.");
+                    "Configure o SMTP e Application__PublicBaseUrl antes de habilitar o envio de e-mail.");
             }
 
             using var client = new System.Net.Mail.SmtpClient(host, port)
@@ -116,5 +119,16 @@ public sealed class ContaEmailService : IContaEmailService
         }
 
         _logger.LogInformation("E-mail de {Finalidade} de desenvolvimento para {Email}: {Link}", finalidade, email, link);
+    }
+
+    private bool HasValidPublicBaseUrl()
+    {
+        var value = _configuration["Application:PublicBaseUrl"];
+        return Uri.TryCreate(value, UriKind.Absolute, out var uri) &&
+               uri.Scheme == Uri.UriSchemeHttps &&
+               string.IsNullOrEmpty(uri.UserInfo) &&
+               string.IsNullOrEmpty(uri.Query) &&
+               string.IsNullOrEmpty(uri.Fragment) &&
+               uri.AbsolutePath == "/";
     }
 }

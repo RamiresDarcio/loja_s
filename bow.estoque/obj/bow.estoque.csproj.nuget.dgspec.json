@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj": {}
+    "C:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj": {}
   },
   "projects": {
-    "c:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj": {
+    "C:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj",
+        "projectUniqueName": "C:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj",
         "projectName": "bow.estoque",
-        "projectPath": "c:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj",
+        "projectPath": "C:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\bow.estoque.csproj",
         "packagesPath": "C:\\Users\\ramir\\.nuget\\packages\\",
-        "outputPath": "c:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\obj\\",
+        "outputPath": "C:\\Laboratório de Programação\\site_loja_s\\bow.estoque\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ramir\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -22,6 +22,7 @@ Abra `/Conta/Cadastro` para criar uma conta e `/Conta/Login` para entrar. O pain
 - Em produção, configure o SMTP exclusivamente por variáveis de ambiente:
 
 ```powershell
+$env:Application__PublicBaseUrl = "https://www.sualoja.com.br"
 $env:Email__Smtp__Host = "smtp.seu-provedor"
 $env:Email__Smtp__Port = "587"
 $env:Email__Smtp__From = "conta@seudominio"
@@ -31,6 +32,7 @@ $env:Email__Smtp__Password = "segredo-fornecido-pelo-provedor"
 dotnet run --project .\loja_s\loja_s.csproj
 ```
 
+- `Application__PublicBaseUrl` deve ser a origem HTTPS pública da loja (sem caminho, query ou fragmento). Os links de redefinição de senha e confirmação de e-mail usam essa origem configurada, evitando confiar no cabeçalho `Host` recebido na requisição. Em `Development`, a origem da requisição é usada somente para facilitar testes locais.
 - Formas de pagamento guardam apenas bandeira, últimos quatro dígitos e um token recebido do gateway, protegido com ASP.NET Core Data Protection. A captura e tokenização reais dependem da integração com um provedor; nunca envie número completo ou CVV para esta aplicação.
 - Carrinhos de visitantes permanecem na sessão. Ao entrar, os itens são mesclados ao carrinho persistido da conta e ajustados ao estoque disponível.
 - Pedidos e detalhes são filtrados pelo usuário autenticado. Endereços de entrega associados a pedidos não podem ser excluídos.

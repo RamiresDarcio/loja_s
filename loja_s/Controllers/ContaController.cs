@@ -22,17 +22,23 @@ public class ContaController : Controller
     private readonly IPasswordHasher<Usuario> _passwordHasher;
     private readonly IContaEmailService _emailService;
     private readonly CarrinhoService _carrinhoService;
+    private readonly IConfiguration _configuration;
+    private readonly IHostEnvironment _environment;
 
     public ContaController(
         ApplicationDbContext context,
         IPasswordHasher<Usuario> passwordHasher,
         IContaEmailService emailService,
-        CarrinhoService carrinhoService)
+        CarrinhoService carrinhoService,
+        IConfiguration configuration,
+        IHostEnvironment environment)
     {
         _context = context;
         _passwordHasher = passwordHasher;
         _emailService = emailService;
         _carrinhoService = carrinhoService;
+        _configuration = configuration;
+        _environment = environment;
     }
 
     [HttpGet]
@@ -489,7 +495,7 @@ public class ContaController : Controller
                 ExpiraEm = DateTime.UtcNow.AddMinutes(30)
             });
             await _context.SaveChangesAsync();
-            var link = Url.Action(nameof(RedefinirSenha), "Conta", new { email, token = rawToken }, Request.Scheme)!;
+            var link = CriarLinkPublico(nameof(RedefinirSenha), new { email, token = rawToken });
             try
             {
                 await _emailService.EnviarLinkRedefinicaoAsync(email, link);
@@ -615,9 +621,38 @@ public class ContaController : Controller
             ExpiraEm = DateTime.UtcNow.AddHours(24)
         });
         await _context.SaveChangesAsync();
-        var link = Url.Action(nameof(ConfirmarEmail), "Conta",
-            new { usuarioId = usuario.Id, token = rawToken }, Request.Scheme)!;
+        var link = CriarLinkPublico(nameof(ConfirmarEmail),
+            new { usuarioId = usuario.Id, token = rawToken });
         await _emailService.EnviarLinkConfirmacaoAsync(usuario.Email, link);
+    }
+
+    private string CriarLinkPublico(string action, object routeValues)
+    {
+        var path = Url.Action(action, "Conta", routeValues);
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            throw new InvalidOperationException("Não foi possível gerar o link da conta.");
+        }
+
+        var publicBaseUrl = _configuration["Application:PublicBaseUrl"];
+        if (string.IsNullOrWhiteSpace(publicBaseUrl) && _environment.IsDevelopment())
+        {
+            publicBaseUrl = $"{Request.Scheme}://{Request.Host}";
+        }
+
+        if (!Uri.TryCreate(publicBaseUrl, UriKind.Absolute, out var baseUri) ||
+            !string.IsNullOrEmpty(baseUri.UserInfo) ||
+            !string.IsNullOrEmpty(baseUri.Query) ||
+            !string.IsNullOrEmpty(baseUri.Fragment) ||
+            baseUri.AbsolutePath != "/" ||
+            (baseUri.Scheme != Uri.UriSchemeHttp && baseUri.Scheme != Uri.UriSchemeHttps) ||
+            (!_environment.IsDevelopment() && baseUri.Scheme != Uri.UriSchemeHttps))
+        {
+            throw new EmailConfigurationException(
+                "Configure Application__PublicBaseUrl com a origem HTTPS pública da loja.");
+        }
+
+        return $"{baseUri.GetLeftPart(UriPartial.Authority)}{path}";
     }
 
     private async Task InvalidarTokensAsync(int usuarioId, string finalidade)
